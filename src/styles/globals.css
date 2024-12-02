@@ -1,0 +1,31 @@
+@import url("_reset.css");
+
+:root {
+	/* Colors */
+	--color-neutral-100: #f8f8f8;
+	--color-neutral-200: #f0f0f0;
+	--color-neutral-300: #e0e0e0;
+	--color-neutral-400: #c0c0c0;
+	--color-neutral-500: #a0a0a0;
+	--color-neutral-600: #808080;
+	--color-neutral-700: #606060;
+	--color-neutral-800: #404040;
+	--color-neutral-900: #202020;
+	--color-accent: #ff6f61;
+
+	/* Length */
+	--gold: 1.618;
+	--base-length: 16px;
+	--md: var(--base-length);
+	--sm: calc(var(--md) / var(--gold));
+	--xs: calc(var(--sm) / var(--gold));
+	--lg: calc(var(--md) * var(--gold));
+	--xl: calc(var(--lg) * var(--gold));
+	--2xl: calc(var(--xl) * var(--gold));
+	--3xl: calc(var(--2xl) * var(--gold));
+	--4xl: calc(var(--3xl) * var(--gold));
+}
+
+body {
+	font-family: var(--font-sriracha);
+}
