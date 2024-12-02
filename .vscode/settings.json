@@ -1,0 +1,49 @@
+{
+	// formatting
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": "explicit"
+	},
+	"editor.formatOnSave": true,
+	"files.trimFinalNewlines": true,
+	"files.trimTrailingWhitespace": true,
+	"html.format.wrapAttributes": "force-aligned",
+	"prettier.endOfLine": "auto",
+	"prettier.printWidth": 120,
+	"prettier.requireConfig": true,
+	"prettier.useTabs": true,
+	"[css]": {
+		"editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features",
+		"editor.quickSuggestions": {
+			"strings": true
+		},
+		"editor.suggest.insertMode": "replace"
+	},
+	"[scss]": {
+		"editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+	},
+	// Git settings
+	"git.autofetch": true,
+	"git.fetchOnPull": true,
+	"git.pruneOnFetch": true,
+	"git.inputValidationSubjectLength": null,
+	// Auto imports
+	"typescript.suggest.autoImports": true,
+	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
+	//  Other settings
+	"scss.validate": true,
+	"editor.linkedEditing": true,
+	"diffEditor.diffAlgorithm": "advanced",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"npm.packageManager": "npm",
+	"npm-intellisense.packageSubfoldersIntellisense": true,
+	"npm-intellisense.scanDevDependencies": true,
+	"eslint.validate": ["javascript", "typescript"]
+}
