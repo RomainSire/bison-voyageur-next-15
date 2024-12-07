@@ -16,14 +16,14 @@
 	/* Length */
 	--gold: 1.618;
 	--base-length: 16px;
+	--xs: calc(var(--base-length) / var(--gold) / var(--gold));
+	--sm: calc(var(--base-length) / var(--gold));
 	--md: var(--base-length);
-	--sm: calc(var(--md) / var(--gold));
-	--xs: calc(var(--sm) / var(--gold));
-	--lg: calc(var(--md) * var(--gold));
-	--xl: calc(var(--lg) * var(--gold));
-	--2xl: calc(var(--xl) * var(--gold));
-	--3xl: calc(var(--2xl) * var(--gold));
-	--4xl: calc(var(--3xl) * var(--gold));
+	--lg: calc(var(--base-length) * var(--gold));
+	--xl: calc(var(--base-length) * var(--gold) * var(--gold));
+	--2xl: calc(var(--base-length) * var(--gold) * var(--gold) * var(--gold));
+	--3xl: calc(var(--base-length) * var(--gold) * var(--gold) * var(--gold) * var(--gold));
+	--4xl: calc(var(--base-length) * var(--gold) * var(--gold) * var(--gold) * var(--gold) * var(--gold));
 }
 
 body {
