@@ -1,4 +1,5 @@
 import { getPostBySlug } from "@/actions/postsActions";
+import ParseMarkdown from "@/components/ParseMarkdown/ParseMarkdown";
 
 type PostPageProps = {
 	params: Promise<{
@@ -15,7 +16,7 @@ export default async function PostPage({ params }: PostPageProps) {
 	return (
 		<div>
 			<h1>{post.title}</h1>
-			<div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+			<ParseMarkdown markdown={post.content} />
 		</div>
 	);
 }
