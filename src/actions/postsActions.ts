@@ -74,3 +74,12 @@ export async function getAllTags() {
 	const tags = allPosts.flatMap((post) => post.tag);
 	return [...new Set(tags)];
 }
+
+/**
+ * Get all the posts by tag
+ */
+export async function getPostsByTag(tag: string) {
+	"use server";
+	const allPosts = await getAllPosts();
+	return allPosts.filter((post) => post.tag.includes(tag));
+}

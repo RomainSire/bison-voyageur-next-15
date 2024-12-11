@@ -1,4 +1,4 @@
-import { getLastPosts } from "@/actions/postsActions";
+import { getAllTags, getLastPosts } from "@/actions/postsActions";
 import directus from "@/lib/directus";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,9 +6,20 @@ import style from "./page.module.css";
 
 export default async function Home() {
 	const lastPosts = await getLastPosts();
+	const allTags = await getAllTags();
 
 	return (
 		<div className={style.page}>
+			<nav>
+				<h1>Tags</h1>
+				<ul>
+					{allTags.map((tag) => (
+						<li key={tag}>
+							<Link href={`/tag/${encodeURIComponent(tag)}`}>{tag}</Link>
+						</li>
+					))}
+				</ul>
+			</nav>
 			<main className={style.main}>
 				{lastPosts.map((post) => (
 					<Link href={`/post/${post.slug}`} key={post.slug}>
