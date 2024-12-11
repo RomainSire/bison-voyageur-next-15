@@ -24,11 +24,12 @@ export async function getAllPosts() {
 
 /**
  * Get the three last posts summary
+ * @param number - Number of posts to get (default 3)
  */
-export async function getLastPosts() {
+export async function getLastPosts(number: number = 3) {
 	"use server";
 	const allPosts = await getAllPosts();
-	return allPosts.slice(0, 3);
+	return allPosts.slice(0, number);
 }
 
 /**
