@@ -1,4 +1,4 @@
-import { getPostsByTag } from "@/actions/postsActions";
+import { getAllTags, getPostsByTag } from "@/actions/postsActions";
 
 type TagPageProps = {
 	params: Promise<{
@@ -6,6 +6,22 @@ type TagPageProps = {
 	}>;
 };
 
+/**
+ * Revalidate time in seconds
+ */
+export const revalidate = 3600; // 1 hours
+
+/**
+ * Generate the static params for the tag pages, used for the static generation
+ */
+export async function generateStaticParams() {
+	const tags = await getAllTags();
+	return tags.map((tag) => ({ tag }));
+}
+
+/**
+ * Tag Page component
+ */
 export default async function TagPage({ params }: TagPageProps) {
 	const tag = (await params).tag;
 	const decodedTag = decodeURIComponent(tag);

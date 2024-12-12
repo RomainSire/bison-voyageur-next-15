@@ -4,6 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import style from "./page.module.css";
 
+/**
+ * Revalidate time in seconds
+ */
+export const revalidate = 3600; // 1 hours
+
+/**
+ * Home Page component
+ */
 export default async function Home() {
 	const lastPosts = await getLastPosts();
 	const allTags = await getAllTags();
