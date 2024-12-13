@@ -22,3 +22,40 @@
 	height: 100%;
 	padding-block: 1rem;
 }
+
+@media (min-width: 768px) {
+	.nav {
+		border-top: none;
+		border-radius: 0;
+		background: none;
+		overflow: visible;
+	}
+	.navList li:first-child {
+		border-right: none;
+		border-radius: 0;
+	}
+	.links {
+		padding-block: 1.5rem;
+		background-color: var(--color-neutral-100);
+		position: absolute;
+		width: fit-content;
+		padding-inline: 2rem;
+		border: solid var(--color-neutral-900);
+	}
+	.navList li:first-child .links {
+		left: 2rem;
+		border-width: 3px 4px 3px 5px;
+		border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+		transform-origin: top left;
+	}
+	.navList li:last-child .links {
+		right: 2rem;
+		border-width: 3px 3px 5px 5px;
+		border-radius: 4% 95% 6% 95%/95% 4% 92% 5%;
+		transform-origin: top right;
+	}
+}
+
+.links:focus-visible {
+	outline: 3px solid var(--color-accent);
+}
