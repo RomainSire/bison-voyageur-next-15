@@ -1,0 +1,24 @@
+.nav {
+	border-top: 3px solid var(--color-neutral-900);
+	border-radius: 10% 20% 0 0/11% 10% 0 0;
+	font-size: 1.3rem;
+	line-height: 1;
+	background-color: var(--color-neutral-100);
+	overflow: hidden;
+}
+.navList {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+.navList li:first-child {
+	border-right: 3px solid var(--color-neutral-900);
+	border-radius: 0% 2% 0% 0%/0% 95% 0% 0%;
+}
+.links {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	height: 100%;
+	padding-block: 1rem;
+}
