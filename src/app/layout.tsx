@@ -1,6 +1,8 @@
+import Header from "@/components/Header/Header";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import style from "./layout.module.css";
 
 const sriracha = localFont({
 	src: "../styles/fonts/Sriracha-Regular.ttf",
@@ -20,7 +22,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="fr">
-			<body className={`${sriracha.variable}`}>{children}</body>
+			<body className={`${sriracha.variable} ${style.body}`}>
+				<main className={style.main}>{children}</main>
+				<Header className={style.header} />
+			</body>
 		</html>
 	);
 }
