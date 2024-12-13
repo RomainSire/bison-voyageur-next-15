@@ -1,5 +1,6 @@
 import { getAllPosts, getPostBySlug } from "@/actions/postsActions";
 import ParseMarkdown from "@/components/ParseMarkdown/ParseMarkdown";
+import { REVALIDATE_TIME } from "@/publicConfig";
 
 type PostPageProps = {
 	params: Promise<{
@@ -10,7 +11,7 @@ type PostPageProps = {
 /**
  * Revalidate time in seconds
  */
-export const revalidate = 3600; // 1 hours
+export const revalidate = REVALIDATE_TIME;
 
 /**
  * Generate the static params for the post pages, used for the static generation

@@ -1,5 +1,6 @@
 import { getAllTags, getLastPosts } from "@/actions/postsActions";
 import directus from "@/lib/directus";
+import { REVALIDATE_TIME } from "@/publicConfig";
 import Image from "next/image";
 import Link from "next/link";
 import style from "./page.module.css";
@@ -7,8 +8,7 @@ import style from "./page.module.css";
 /**
  * Revalidate time in seconds
  */
-export const revalidate = 3600; // 1 hours
-
+export const revalidate = REVALIDATE_TIME;
 /**
  * Home Page component
  */

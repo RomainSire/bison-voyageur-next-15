@@ -1,4 +1,5 @@
 import { getAllTags, getPostsByTag } from "@/actions/postsActions";
+import { REVALIDATE_TIME } from "@/publicConfig";
 
 type TagPageProps = {
 	params: Promise<{
@@ -9,7 +10,7 @@ type TagPageProps = {
 /**
  * Revalidate time in seconds
  */
-export const revalidate = 3600; // 1 hours
+export const revalidate = REVALIDATE_TIME;
 
 /**
  * Generate the static params for the tag pages, used for the static generation

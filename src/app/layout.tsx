@@ -10,7 +10,7 @@ const sriracha = localFont({
 
 export const metadata: Metadata = {
 	title: "Bison Voyageur",
-	description: "Blog de voyage autour du monde",
+	description: "Blog de mon voyage autour du monde",
 };
 
 export default function RootLayout({
