@@ -2,16 +2,16 @@
 
 :root {
 	/* Colors */
-	--color-neutral-100: #f8f8f8;
-	--color-neutral-200: #f0f0f0;
-	--color-neutral-300: #e0e0e0;
-	--color-neutral-400: #c0c0c0;
-	--color-neutral-500: #a0a0a0;
-	--color-neutral-600: #808080;
-	--color-neutral-700: #606060;
-	--color-neutral-800: #404040;
-	--color-neutral-900: #202020;
-	--color-accent: #ff6f61;
+	--color-neutral-100: hsla(20, 100%, 99%, 1);
+	--color-neutral-200: hsla(28, 21%, 86%, 1);
+	--color-neutral-300: hsla(28, 12%, 75%, 1);
+	--color-neutral-400: hsla(25, 9%, 63%, 1);
+	--color-neutral-500: hsla(25, 7%, 52%, 1);
+	--color-neutral-600: hsla(25, 9%, 41%, 1);
+	--color-neutral-700: hsla(27, 14%, 29%, 1);
+	--color-neutral-800: hsla(23, 23%, 18%, 1);
+	--color-neutral-900: hsla(25, 69%, 6%, 1);
+	--color-accent: hsla(121, 32%, 41%, 1);
 
 	/* Length */
 	--gold: 1.618;
@@ -28,4 +28,15 @@
 
 body {
 	font-family: var(--font-sriracha);
+	color: var(--color-neutral-900);
+	background-color: var(--color-neutral-100);
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
 }
