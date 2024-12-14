@@ -24,7 +24,7 @@ export default function Header({ className }: HeaderProps) {
 						href="/"
 						className={style.links}
 						whileHover={{ scale: 1.1, y: -5 }}
-						whileTap={{ scale: 1 }}
+						whileTap={{ scale: 1.05 }}
 						transition={{ type: "spring", stiffness: 500 }}
 					>
 						Bison Voyageur
@@ -35,7 +35,7 @@ export default function Header({ className }: HeaderProps) {
 						href="/menu"
 						className={style.links}
 						whileHover={{ scale: 1.1, y: -5 }}
-						whileTap={{ scale: 1 }}
+						whileTap={{ scale: 1.05 }}
 						transition={{ type: "spring", stiffness: 500 }}
 					>
 						Menu
