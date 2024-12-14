@@ -1,4 +1,5 @@
 import { getLastPosts } from "@/actions/postsActions";
+import FormatedDate from "@/components/FormatedDate/FormatedDate";
 import directus from "@/lib/directus";
 import { REVALIDATE_TIME } from "@/publicConfig";
 import Image from "next/image";
@@ -23,10 +24,6 @@ export default async function Home() {
 				Voyageur
 			</h1>
 			{lastPosts.map((post) => {
-				const date = new Intl.DateTimeFormat("fr", {
-					dateStyle: "full",
-				}).format(new Date(post.date));
-
 				return (
 					<Link
 						href={`/post/${post.slug}`}
@@ -42,7 +39,7 @@ export default async function Home() {
 								className={style.cardImage}
 							/>
 							<h2 className={style.cardTitle}>{post.title}</h2>
-							<p className={style.cardSubTitle}>{date}</p>
+							<FormatedDate date={post.date} className={style.cardDate} />
 						</article>
 					</Link>
 				);
