@@ -10,7 +10,7 @@ type HeaderProps = Readonly<{
 /**
  * Animated link component (with Motion)
  */
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 /**
  * Header component
