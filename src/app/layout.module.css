@@ -1,6 +1,13 @@
 .body {
 	height: 100vh;
 	height: 100dvh;
+	background-image: url("/home-bg.webp");
+	background-attachment: fixed;
+	background-clip: border-box;
+	background-origin: border-box;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 .main {
 	padding-bottom: 5rem;
