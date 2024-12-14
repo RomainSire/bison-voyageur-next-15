@@ -16,23 +16,37 @@ export default async function Home() {
 	const lastPosts = await getLastPosts();
 
 	return (
-		<div className={style.page}>
-			<main className={style.main}>
-				{lastPosts.map((post) => (
-					<Link href={`/post/${post.slug}`} key={post.slug}>
-						<article style={{ maxWidth: "400px", marginBottom: "5rem" }}>
-							<h2>{post.title}</h2>
-							<p>{post.date}</p>
+		<section className={style.section}>
+			<h1 className={style.title}>
+				Bison
+				<br />
+				Voyageur
+			</h1>
+			{lastPosts.map((post) => {
+				const date = new Intl.DateTimeFormat("fr", {
+					dateStyle: "full",
+				}).format(new Date(post.date));
+
+				return (
+					<Link
+						href={`/post/${post.slug}`}
+						key={post.slug}
+						className={style.link}
+					>
+						<article>
 							<Image
 								src={`${directus.url}assets/${post.mainPicture.filename_disk}`}
 								alt={post.mainPicture.title ?? ""}
 								width={post.mainPicture.width ?? undefined}
 								height={post.mainPicture.height ?? undefined}
+								className={style.cardImage}
 							/>
+							<h2 className={style.cardTitle}>{post.title}</h2>
+							<p className={style.cardSubTitle}>{date}</p>
 						</article>
 					</Link>
-				))}
-			</main>
-		</div>
+				);
+			})}
+		</section>
 	);
 }
