@@ -1,17 +1,17 @@
-.section {
+.wrapper {
 	display: grid;
 	place-items: center;
 	gap: 3rem;
 }
-.title {
-	font-size: 5rem;
+.hero {
+	margin-top: 8rem;
 	margin-bottom: 5rem;
 }
 .link {
 	display: block;
 	width: 300px;
 	border: 1px solid var(--color-neutral-900);
-	box-shadow: 0 0 10px 0 var(--color-neutral-900);
+	box-shadow: 0 0 0.5rem 0 var(--color-neutral-900);
 	padding: 7px;
 	background-color: var(--color-neutral-100);
 }
@@ -23,10 +23,10 @@
 	margin-bottom: 7px;
 }
 .cardTitle {
-	font-size: 1.3rem;
+	font-size: var(--font-size-1);
 	font-weight: 500;
 }
 .cardDate {
-	font-size: 1rem;
+	font-size: var(--font-size--0);
 	color: var(--color-neutral-600);
 }
