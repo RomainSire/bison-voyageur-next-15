@@ -10,7 +10,7 @@ export default function MainHero({ className }: MainHeroProps) {
 		<section className={`${style.wrapper} ${className}`}>
 			<Image
 				src={"/logo.svg"}
-				alt="Bison Voyageur"
+				alt="Logo de Bison Voyageur: un portrait de bison stylisé"
 				width={200}
 				height={200}
 				className={style.image}
