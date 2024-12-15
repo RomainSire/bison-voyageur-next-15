@@ -13,6 +13,18 @@
 	--color-neutral-900: hsla(25, 69%, 6%, 1);
 	--color-accent: hsla(121, 32%, 41%, 1);
 
+	/* Font size */
+	/* @link https://utopia.fyi/type/calculator?c=320,14,1.2,1240,16,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+	--font-size--2: clamp(0.5628rem, 0.6232rem + -0.078vw, 0.6076rem);
+	--font-size--1: clamp(0.7292rem, 0.7219rem + 0.0366vw, 0.7502rem);
+	--font-size-0: clamp(0.875rem, 0.8315rem + 0.2174vw, 1rem);
+	--font-size-1: clamp(1.05rem, 0.9516rem + 0.4922vw, 1.333rem);
+	--font-size-2: clamp(1.26rem, 1.0802rem + 0.8989vw, 1.7769rem);
+	--font-size-3: clamp(1.512rem, 1.2141rem + 1.4897vw, 2.3686rem);
+	--font-size-4: clamp(1.8144rem, 1.3473rem + 2.3355vw, 3.1573rem);
+	--font-size-5: clamp(2.1773rem, 1.4707rem + 3.533vw, 4.2087rem);
+	--font-size-6: clamp(2.6127rem, 1.584rem + 7vw, 8rem);
+
 	/* Length */
 	--gold: 1.618;
 	--base-length: 16px;
@@ -30,6 +42,7 @@ body {
 	font-family: var(--font-sriracha);
 	color: var(--color-neutral-900);
 	background-color: var(--color-neutral-100);
+	font-size: var(--font-size-0);
 }
 
 ul {
