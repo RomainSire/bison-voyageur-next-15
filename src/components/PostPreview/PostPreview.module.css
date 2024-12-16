@@ -1,0 +1,23 @@
+.link {
+	display: block;
+	width: 300px;
+	border: 1px solid var(--color-neutral-900);
+	box-shadow: 0 0 0.5rem 0 var(--color-neutral-900);
+	padding: 7px;
+	background-color: var(--color-neutral-100);
+}
+.cardImage {
+	aspect-ratio: 1;
+	object-fit: cover;
+	width: 100%;
+	height: auto;
+	margin-bottom: 7px;
+}
+.cardTitle {
+	font-size: var(--font-size-1);
+	font-weight: 500;
+}
+.cardDate {
+	font-size: var(--font-size--0);
+	color: var(--color-neutral-600);
+}
