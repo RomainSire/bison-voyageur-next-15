@@ -9,11 +9,17 @@ import style from "./PostPreview.module.css";
 
 type PostPreviewProps = {
 	post: PostSchemaLight;
+	motionInitialX?: number;
+	motionInitialDelay?: number;
 };
 
 const MotionLink = motion.create(Link);
 
-export default function PostPreview({ post }: PostPreviewProps) {
+export default function PostPreview({
+	post,
+	motionInitialX = 0,
+	motionInitialDelay = 0,
+}: PostPreviewProps) {
 	// random angle between -3 and 3
 	const angle = Math.random() * 6 - 3;
 
@@ -23,7 +29,13 @@ export default function PostPreview({ post }: PostPreviewProps) {
 			className={style.link}
 			whileHover={{ scale: 1.03, rotate: 0 }}
 			whileTap={{ scale: 0.95 }}
-			animate={{ rotate: angle }}
+			initial={{ x: motionInitialX, opacity: 0, rotate: -15 }}
+			animate={{
+				x: 0,
+				opacity: 1,
+				rotate: angle,
+				transition: { delay: motionInitialDelay },
+			}}
 		>
 			<article>
 				<Image
