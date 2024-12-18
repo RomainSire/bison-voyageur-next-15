@@ -23,7 +23,7 @@ export default function PostPreview({
 	motionInitialDelay = 0,
 }: PostPreviewProps) {
 	// random angle between -3 and 3
-	const angle = Math.random() * 6 - 3;
+	const angle = Math.random() * 10 - 3;
 
 	return (
 		<MotionLink
