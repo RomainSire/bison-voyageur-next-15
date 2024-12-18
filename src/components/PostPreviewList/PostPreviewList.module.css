@@ -1,11 +1,13 @@
 .section {
+	--picture-shift: 75px;
 	width: 100%;
 	max-width: 1200px;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr;
 	grid-auto-rows: auto;
 	row-gap: 2rem;
 	column-gap: 0.5rem;
+	padding-bottom: var(--picture-shift);
 }
 .postWrapper {
 	display: flex;
@@ -13,8 +15,12 @@
 	align-items: center;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
 	.section {
-		grid-template-columns: 1fr;
+		grid-template-columns: 1fr 1fr;
+	}
+	.postWrapper:nth-child(2n) .post {
+		position: relative;
+		top: var(--picture-shift);
 	}
 }

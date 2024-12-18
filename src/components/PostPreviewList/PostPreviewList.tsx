@@ -17,6 +17,7 @@ export default function PostPreviewList({ posts }: PostPreviewListProps) {
 					<div className={style.postWrapper} key={post.slug}>
 						<PostPreview
 							post={post}
+							className={style.post}
 							motionInitialX={motionInitialX}
 							motionInitialDelay={motionInitialDelay}
 						/>

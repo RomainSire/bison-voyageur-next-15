@@ -9,6 +9,7 @@ import style from "./PostPreview.module.css";
 
 type PostPreviewProps = {
 	post: PostSchemaLight;
+	className?: string;
 	motionInitialX?: number;
 	motionInitialDelay?: number;
 };
@@ -17,6 +18,7 @@ const MotionLink = motion.create(Link);
 
 export default function PostPreview({
 	post,
+	className,
 	motionInitialX = 0,
 	motionInitialDelay = 0,
 }: PostPreviewProps) {
@@ -26,7 +28,7 @@ export default function PostPreview({
 	return (
 		<MotionLink
 			href={`/post/${post.slug}`}
-			className={style.link}
+			className={`${style.link} ${className ?? ""}`}
 			whileHover={{ scale: 1.03, rotate: 0 }}
 			whileTap={{ scale: 0.95 }}
 			initial={{ x: motionInitialX, opacity: 0, rotate: -15 }}
