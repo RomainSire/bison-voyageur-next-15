@@ -1,7 +1,6 @@
 .wrapper {
 	display: grid;
 	place-items: center;
-	gap: 3rem;
 }
 .hero {
 	margin-top: 8rem;
