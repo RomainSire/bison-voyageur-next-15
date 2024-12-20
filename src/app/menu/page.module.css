@@ -1,0 +1,21 @@
+.wrapper {
+	display: grid;
+	place-items: center;
+}
+.mainTitle {
+	margin-top: 5rem;
+}
+.subTitle {
+	margin-top: 2.5rem;
+	margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+	.mainTitle {
+		margin-top: 10rem;
+	}
+	.subTitle {
+		margin-top: 4rem;
+		margin-bottom: 2rem;
+	}
+}
