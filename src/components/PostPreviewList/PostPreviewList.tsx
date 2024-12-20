@@ -9,21 +9,23 @@ type PostPreviewListProps = {
 
 export default function PostPreviewList({ posts }: PostPreviewListProps) {
 	return (
-		<section className={style.section}>
-			{posts.map((post, index) => {
-				const motionInitialX = index % 2 === 0 ? -100 : 100;
-				const motionInitialDelay = (index + 1) * 0.1;
-				return (
-					<div className={style.postWrapper} key={post.slug}>
-						<PostPreview
-							post={post}
-							className={style.post}
-							motionInitialX={motionInitialX}
-							motionInitialDelay={motionInitialDelay}
-						/>
-					</div>
-				);
-			})}
-		</section>
+		<nav className={style.section}>
+			<ul className={style.list}>
+				{posts.map((post, index) => {
+					const motionInitialX = index % 2 === 0 ? -100 : 100;
+					const motionInitialDelay = (index + 1) * 0.1;
+					return (
+						<li className={style.postWrapper} key={post.slug}>
+							<PostPreview
+								post={post}
+								className={style.post}
+								motionInitialX={motionInitialX}
+								motionInitialDelay={motionInitialDelay}
+							/>
+						</li>
+					);
+				})}
+			</ul>
+		</nav>
 	);
 }
