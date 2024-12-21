@@ -1,7 +1,7 @@
 import { getAllPosts, getAllTags } from "@/actions/postsActions";
 import PostPreviewList from "@/components/PostPreviewList/PostPreviewList";
+import TagList from "@/components/TagList/TagList";
 import { REVALIDATE_TIME } from "@/publicConfig";
-import Link from "next/link";
 import style from "./page.module.css";
 
 /**
@@ -18,19 +18,17 @@ export default async function MainMenuPage() {
 
 	return (
 		<div className={style.wrapper}>
-			<h1 className={style.mainTitle}>Menu général</h1>
+			<h1 className={`${style.mainTitle} entryAnimation`}>Menu général</h1>
 
-			<h2 className={style.subTitle}>Tous les tags</h2>
-			<ul>
-				{allTags.map((tag) => (
-					<li key={tag}>
-						<Link href={`/tag/${encodeURIComponent(tag)}`}>{tag}</Link>
-					</li>
-				))}
-			</ul>
+			<h2 className={`${style.subTitle} entryAnimation delay2`}>
+				Tous les tags
+			</h2>
+			<TagList tags={allTags} motionInitialDelay={0.25} />
 
-			<h2 className={style.subTitle}>Tous les posts</h2>
-			<PostPreviewList posts={allPosts} />
+			<h2 className={`${style.subTitle} entryAnimation delay6`}>
+				Tous les posts
+			</h2>
+			<PostPreviewList posts={allPosts} motionInitialDelay={0.7} />
 		</div>
 	);
 }
