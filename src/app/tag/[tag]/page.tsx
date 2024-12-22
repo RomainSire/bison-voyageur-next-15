@@ -1,5 +1,7 @@
 import { getAllTags, getPostsByTag } from "@/actions/postsActions";
+import PostPreviewList from "@/components/PostPreviewList/PostPreviewList";
 import { REVALIDATE_TIME } from "@/publicConfig";
+import style from "./page.module.css";
 
 type TagPageProps = {
 	params: Promise<{
@@ -26,18 +28,12 @@ export async function generateStaticParams() {
 export default async function TagPage({ params }: TagPageProps) {
 	const tag = (await params).tag;
 	const decodedTag = decodeURIComponent(tag);
-	const posts = await getPostsByTag(decodedTag);
-	console.log({ tag, posts });
+	const taggedPosts = await getPostsByTag(decodedTag);
 
 	return (
-		<div>
-			<h1>{decodedTag}</h1>
-			{posts.map((post) => (
-				<article key={post.slug}>
-					<h2>{post.title}</h2>
-					<p>{post.date}</p>
-				</article>
-			))}
+		<div className={style.wrapper}>
+			<h1 className={`${style.mainTitle} entryAnimation`}>Tag: {decodedTag}</h1>
+			<PostPreviewList posts={taggedPosts} motionInitialDelay={0.1} />
 		</div>
 	);
 }
