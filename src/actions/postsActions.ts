@@ -1,6 +1,7 @@
 "use server";
 
 import directus from "@/lib/directus";
+import { PostSchema, PostSchemaLight } from "@/Schemas/PostSchema";
 import { readItem, readItems } from "@directus/sdk";
 
 /**
@@ -16,12 +17,13 @@ export async function getAllPosts() {
 				"slug",
 				"date",
 				{ mainPicture: ["filename_disk", "title", "height", "width"] },
+				"mainPictureAlt",
 				"tag",
 				"summary",
 			],
 			sort: "-date",
 		}),
-	);
+	) as Promise<PostSchemaLight[]>;
 }
 
 /**
@@ -47,12 +49,13 @@ export async function getPostById(id: string) {
 				"slug",
 				"date",
 				{ mainPicture: ["filename_disk", "title", "height", "width"] },
+				"mainPictureAlt",
 				"tag",
 				"summary",
 				"content",
 			],
 		}),
-	);
+	) as Promise<PostSchema>;
 }
 
 /**

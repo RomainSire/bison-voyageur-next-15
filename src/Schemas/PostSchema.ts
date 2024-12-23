@@ -17,6 +17,7 @@ export interface PostSchema {
 	date: string;
 	tag: string[];
 	mainPicture: MainPictureSchema;
+	mainPictureAlt: string;
 	summary: string;
 	content: string;
 }
@@ -26,7 +27,7 @@ export interface PostSchema {
  */
 export type PostSchemaLight = Pick<
 	PostSchema,
-	"id" | "slug" | "title" | "date"
+	"id" | "slug" | "title" | "date" | "tag" | "summary" | "mainPictureAlt"
 > & {
 	mainPicture: MainPictureSchemaLight;
 };

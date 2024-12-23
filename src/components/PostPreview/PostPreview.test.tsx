@@ -14,6 +14,9 @@ const mockPost: PostSchemaLight = {
 		width: 800,
 		height: 600,
 	},
+	tag: ["sample"],
+	summary: "This is a sample post",
+	mainPictureAlt: "Sample Image",
 };
 
 describe("PostPreview", () => {

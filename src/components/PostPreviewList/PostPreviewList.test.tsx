@@ -14,6 +14,9 @@ const mockPosts: PostSchemaLight[] = [
 			height: 100,
 			width: 100,
 		},
+		tag: ["tag1"],
+		summary: "Summary 1",
+		mainPictureAlt: "Image 1",
 	},
 	{
 		id: "2",
@@ -26,6 +29,9 @@ const mockPosts: PostSchemaLight[] = [
 			height: 100,
 			width: 100,
 		},
+		tag: ["tag1"],
+		summary: "Summary 1",
+		mainPictureAlt: "Image 2",
 	},
 ];
 
