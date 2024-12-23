@@ -17,7 +17,7 @@ const MotionLink = motion.create(Link);
  */
 export default function Header({ className }: HeaderProps) {
 	return (
-		<nav className={`${className} ${style.nav}`}>
+		<nav className={`${className ?? ""} ${style.nav}`}>
 			<ul className={style.navList}>
 				<li>
 					<MotionLink

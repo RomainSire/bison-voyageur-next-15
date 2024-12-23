@@ -18,7 +18,7 @@ const MotionImage = motion.create(Image);
  */
 export default function MainHero({ className }: MainHeroProps) {
 	return (
-		<section className={`${style.wrapper} ${className}`}>
+		<section className={`${style.wrapper} ${className ?? ""}`}>
 			<MotionImage
 				src={"/logo.svg"}
 				alt="Logo de Bison Voyageur: un portrait de bison stylisé"

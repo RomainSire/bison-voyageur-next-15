@@ -13,5 +13,7 @@ export default function FormatedDate({ date, className }: FormatedDateProps) {
 		dateStyle: "full",
 	}).format(new Date(date));
 
-	return <time className={`${style.time} ${className}`}>{formatedDate}</time>;
+	return (
+		<time className={`${style.time} ${className ?? ""}`}>{formatedDate}</time>
+	);
 }

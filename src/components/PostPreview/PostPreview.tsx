@@ -42,7 +42,7 @@ export default function PostPreview({
 			<article>
 				<Image
 					src={`${directus.url}assets/${post.mainPicture.filename_disk}`}
-					alt={post.mainPicture.title ?? ""}
+					alt={post.mainPictureAlt}
 					width={post.mainPicture.width ?? undefined}
 					height={post.mainPicture.height ?? undefined}
 					className={style.cardImage}
