@@ -2,7 +2,7 @@
 import FormatedDate from "@/components/FormatedDate/FormatedDate";
 import { PostSchema } from "@/Schemas/PostSchema";
 import { motion } from "motion/react";
-import ParseMarkdown from "../ParseMarkdown/ParseMarkdown";
+import MarkdownParser from "../MarkdownParser/MarkdownParser";
 import style from "./PostContent.module.css";
 
 type PostContentProps = {
@@ -27,7 +27,7 @@ export default function PostContent({
 			}}
 		>
 			<FormatedDate date={post.date} className={style.date} />
-			<ParseMarkdown markdown={post.content} />
+			<MarkdownParser markdown={post.content} />
 		</motion.div>
 	);
 }
