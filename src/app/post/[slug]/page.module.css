@@ -1,15 +1,27 @@
 .wrapper {
-	--content-inline-padding: 2rem;
+	--content-padding-inline: 1.3rem;
+	--content-padding-block: 0.8rem;
+	--content-gap: 0.8rem;
+	--text-width: 60ch;
+
 	display: grid;
 	place-items: center;
-	gap: 3rem;
+	gap: 6rem;
 }
 .header {
-	width: min(95%, calc(65ch + var(--content-inline-padding) * 2));
+	width: min(95%, calc(var(--text-width) + var(--content-padding-inline) * 2));
 	margin-top: 5rem;
+}
+.content {
+	width: min(95%, calc(var(--text-width) + var(--content-padding-inline) * 2));
 }
 
 @media (min-width: 768px) {
+	.wrapper {
+		--content-padding-inline: 2.5rem;
+		--content-padding-block: 1.5rem;
+		--content-gap: 2rem;
+	}
 	.header {
 		margin-top: 10rem;
 	}

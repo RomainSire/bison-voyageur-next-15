@@ -1,0 +1,12 @@
+.date {
+	font-size: var(--font-size-1);
+	color: var(--color-neutral-600);
+}
+.content {
+	display: grid;
+	gap: var(--content-gap);
+	padding-inline: var(--content-padding-inline);
+	padding-block: var(--content-padding-block);
+	background-color: var(--color-neutral-100);
+	box-shadow: 0 0 0.5rem 0 var(--color-neutral-900);
+}

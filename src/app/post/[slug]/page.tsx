@@ -1,5 +1,5 @@
 import { getAllPosts, getPostBySlug } from "@/actions/postsActions";
-import ParseMarkdown from "@/components/PostUi/ParseMarkdown/ParseMarkdown";
+import PostContent from "@/components/PostUi/PostContent/PostContent";
 import PostHeader from "@/components/PostUi/PostHeader/PostHeader";
 import { REVALIDATE_TIME } from "@/publicConfig";
 import style from "./page.module.css";
@@ -32,12 +32,14 @@ export default async function PostPage({ params }: PostPageProps) {
 	const slug = (await params).slug;
 	const post = await getPostBySlug(slug);
 
-	console.log({ post });
-
 	return (
 		<div className={style.wrapper}>
 			<PostHeader post={post} className={style.header} />
-			<ParseMarkdown markdown={post.content} />
+			<PostContent
+				post={post}
+				className={style.content}
+				motionInitialDelay={0.2}
+			/>
 		</div>
 	);
 }
