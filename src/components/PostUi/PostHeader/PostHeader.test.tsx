@@ -1,6 +1,14 @@
+import { MainPictureSchema } from "@/Schemas/MainPictureSchema";
 import { PostSchema } from "@/Schemas/PostSchema";
 import { render, screen } from "@testing-library/react";
 import PostHeader from "./PostHeader";
+
+const mainPicture = {
+	filename_disk: "test-image.jpg",
+	width: 800,
+	height: 600,
+	title: "Test Image",
+} as MainPictureSchema;
 
 const mockPost: PostSchema = {
 	id: "1",
@@ -12,12 +20,7 @@ const mockPost: PostSchema = {
 	slug: "test-post",
 	date: "2024-12-01",
 	tag: ["test"],
-	mainPicture: {
-		filename_disk: "test-image.jpg",
-		width: 800,
-		height: 600,
-		title: "Test Image",
-	},
+	mainPicture: mainPicture,
 	mainPictureAlt: "Test Image",
 	summary: "This is a test post",
 	content: "This is the test post content",

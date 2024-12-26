@@ -1,4 +1,7 @@
-import type { MainPictureSchemaLight } from "./MainPictureSchema";
+import type {
+	MainPictureSchema,
+	MainPictureSchemaLight,
+} from "./MainPictureSchema";
 
 /**
  * The schema of a post
@@ -13,7 +16,7 @@ export interface PostSchema {
 	slug: string;
 	date: string;
 	tag: string[];
-	mainPicture: MainPictureSchemaLight;
+	mainPicture: MainPictureSchema;
 	mainPictureAlt: string;
 	summary: string;
 	content: string;
