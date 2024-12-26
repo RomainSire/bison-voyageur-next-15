@@ -4,7 +4,7 @@ import { PostSchemaLight } from "@/Schemas/PostSchema";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import FormatedDate from "../FormatedDate/FormatedDate";
+import FormatedDate from "../../FormatedDate/FormatedDate";
 import style from "./PostPreview.module.css";
 
 type PostPreviewProps = {

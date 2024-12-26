@@ -1,6 +1,6 @@
 import { getLastPosts } from "@/actions/postsActions";
 import MainHero from "@/components/MainHero/MainHero";
-import PostPreviewList from "@/components/PostPreviewList/PostPreviewList";
+import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
 import { REVALIDATE_TIME } from "@/publicConfig";
 import style from "./page.module.css";
 

@@ -1,5 +1,5 @@
 import { getAllTags, getPostsByTag } from "@/actions/postsActions";
-import PostPreviewList from "@/components/PostPreviewList/PostPreviewList";
+import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
 import { REVALIDATE_TIME } from "@/publicConfig";
 import style from "./page.module.css";
 

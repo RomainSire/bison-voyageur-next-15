@@ -1,6 +1,6 @@
 import { getAllPosts, getPostBySlug } from "@/actions/postsActions";
-import ParseMarkdown from "@/components/ParseMarkdown/ParseMarkdown";
-import PostHeader from "@/components/PostHeader/PostHeader";
+import ParseMarkdown from "@/components/PostUi/ParseMarkdown/ParseMarkdown";
+import PostHeader from "@/components/PostUi/PostHeader/PostHeader";
 import { REVALIDATE_TIME } from "@/publicConfig";
 import style from "./page.module.css";
 
