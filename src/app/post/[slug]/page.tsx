@@ -1,6 +1,8 @@
 import { getAllPosts, getPostBySlug } from "@/actions/postsActions";
 import ParseMarkdown from "@/components/ParseMarkdown/ParseMarkdown";
+import PostHeader from "@/components/PostHeader/PostHeader";
 import { REVALIDATE_TIME } from "@/publicConfig";
+import style from "./page.module.css";
 
 type PostPageProps = {
 	params: Promise<{
@@ -33,8 +35,8 @@ export default async function PostPage({ params }: PostPageProps) {
 	console.log({ post });
 
 	return (
-		<div>
-			<h1>{post.title}</h1>
+		<div className={style.wrapper}>
+			<PostHeader post={post} className={style.header} />
 			<ParseMarkdown markdown={post.content} />
 		</div>
 	);

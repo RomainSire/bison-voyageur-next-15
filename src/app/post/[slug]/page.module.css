@@ -1,0 +1,16 @@
+.wrapper {
+	--content-inline-padding: 2rem;
+	display: grid;
+	place-items: center;
+	gap: 3rem;
+}
+.header {
+	width: min(95%, calc(65ch + var(--content-inline-padding) * 2));
+	margin-top: 5rem;
+}
+
+@media (min-width: 768px) {
+	.header {
+		margin-top: 10rem;
+	}
+}

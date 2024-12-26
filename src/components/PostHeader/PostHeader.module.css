@@ -1,0 +1,47 @@
+.wrapper {
+	position: relative;
+}
+.image {
+	width: 100%;
+	height: auto;
+	border: 5px solid var(--color-neutral-100);
+	box-shadow: 0 0 0.5rem 0 var(--color-neutral-900);
+	border-radius: 2px;
+}
+.title {
+	position: absolute;
+	left: 1.5em;
+	top: 93%;
+	text-align: center;
+	font-size: var(--font-size-2);
+	padding: 0.5em 1em;
+	background-color: var(--color-neutral-100);
+	border: solid black;
+
+	border-width: 3px 4px 3px 5px;
+	border-radius: 95% 2% 92% 2%/4% 95% 6% 95%;
+}
+
+.title::before {
+	--bubble-width: 60px;
+	--bubble-height: 80px;
+	--bubble-border-size-1: 3px;
+	--bubble-border-size-2: 15px;
+	--position-y: -30px;
+	--position-x: 80px;
+
+	content: "";
+	position: absolute;
+	top: var(--position-y);
+	left: var(--position-x);
+	width: var(--bubble-width);
+	height: var(--bubble-height);
+	background-color: transparent;
+	border-color: var(--color-neutral-900);
+	border-radius: 50%;
+	box-shadow:
+		calc(-1 * var(--bubble-border-size-1)) 0,
+		calc(-1 * var(--bubble-border-size-2)) var(--bubble-border-size-1) var(--color-neutral-100),
+		calc(-1 * var(--bubble-border-size-2)) var(--bubble-border-size-1) 0 var(--bubble-border-size-1);
+	clip-path: polygon(-50% 0%, 50% 0%, 50% 45%, -50% 45%);
+}
