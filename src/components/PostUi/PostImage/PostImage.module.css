@@ -1,5 +1,10 @@
 .image {
 	margin-inline: auto;
 	max-height: 500px;
+	width: auto;
 	object-fit: contain;
+}
+.button {
+	all: unset;
+	cursor: pointer;
 }
