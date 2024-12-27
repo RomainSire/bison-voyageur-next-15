@@ -14,6 +14,7 @@ html {
 	-webkit-text-size-adjust: none;
 	text-size-adjust: none;
 	scroll-behavior: smooth;
+	interpolate-size: allow-keywords;
 }
 
 body {
