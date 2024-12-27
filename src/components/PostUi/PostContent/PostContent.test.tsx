@@ -26,7 +26,7 @@ const mockPost: PostSchema = {
 	content: "This is the test post content",
 };
 
-jest.mock("../ParseMarkdown/ParseMarkdown", () => () => (
+jest.mock("../MarkdownParser/MarkdownParser", () => () => (
 	<div>Mocked Markdown Content</div>
 ));
 
