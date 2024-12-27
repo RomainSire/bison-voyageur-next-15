@@ -1,0 +1,5 @@
+.image {
+	margin-inline: auto;
+	max-height: 500px;
+	object-fit: contain;
+}
