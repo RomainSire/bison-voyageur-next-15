@@ -1,10 +1,16 @@
 .image {
 	margin-inline: auto;
 	max-height: 500px;
+	max-width: min(500px, 100%);
 	width: auto;
+	height: auto;
 	object-fit: contain;
 }
 .button {
 	all: unset;
 	cursor: pointer;
+}
+.button:focus-visible .image {
+	outline: 3px solid var(--color-accent);
+	outline-offset: 2px;
 }

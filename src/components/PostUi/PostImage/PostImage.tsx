@@ -7,27 +7,25 @@ import style from "./PostImage.module.css";
 type PostImageProps = {
 	src: string;
 	alt: string;
+	onImageClick?: (image: { src: string; alt: string }) => void;
 };
 
-const MotionImage = motion.create(Image);
-
-export default function PostImage({ src, alt }: PostImageProps) {
-	const onPictureClick = () => {
-		// TODO: open modal instead of new tab
-		window.open(src, "_blank");
-	};
-
+export default function PostImage({ src, alt, onImageClick }: PostImageProps) {
 	return (
-		<button className={style.button} type="button" onClick={onPictureClick}>
-			<MotionImage
+		<motion.button
+			className={style.button}
+			type="button"
+			whileHover={{ scale: 1.03, y: -5 }}
+			whileTap={{ scale: 0.98 }}
+			onClick={onImageClick ? () => onImageClick({ src, alt }) : undefined}
+		>
+			<Image
 				className={style.image}
 				src={src}
 				alt={alt}
 				width={500}
 				height={500}
-				whileHover={{ scale: 1.03, y: -5 }}
-				whileTap={{ scale: 0.98 }}
 			/>
-		</button>
+		</motion.button>
 	);
 }
