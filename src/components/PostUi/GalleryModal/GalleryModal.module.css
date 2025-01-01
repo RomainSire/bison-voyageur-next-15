@@ -1,0 +1,17 @@
+.modal {
+	position: fixed;
+	inset: 0;
+	background-color: color-mix(in srgb, var(--color-neutral-900) 90%, transparent);
+	z-index: 100;
+}
+.image {
+	margin-inline: auto;
+	max-height: 50vh;
+	max-width: 50vw;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+}
+.visuallyHidden {
+	/* TODO: do it ! */
+}
