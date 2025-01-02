@@ -43,6 +43,7 @@ export default function PostContent({
 				opacity: 1,
 				transition: { delay: motionInitialDelay },
 			}}
+			id="post-content"
 		>
 			<FormatedDate date={post.date} className={style.date} />
 			<MarkdownParser markdown={post.content} onImageClick={handleImageClick} />

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./GalleryModal.module.css";
 
 type GalleryModalProps = {
@@ -12,9 +12,6 @@ type GalleryModalProps = {
 
 /**
  * TODO:
- * - navigation au clavier (lorsqu'on ouvre la modale)
- * - navigation au clavier (next/prev/close)
- * - Accessibilité
  * - Animation
  * - Tests
  */
@@ -25,13 +22,35 @@ export default function GalleryModal({
 	setImageIndex,
 	allImages,
 }: GalleryModalProps) {
-	// Prevent background scrolling when the modal is open
+	const dialogRef = useRef<HTMLDivElement>(null);
+	const [lastClickedImageId, setLastClickedImageId] = useState<string>("");
+
 	useEffect(() => {
-		const body = document.body;
 		if (isOpen) {
-			body.classList.add("no-scroll");
+			// Prevent background scrolling when the modal is open
+			document.body.style.position = "fixed";
+			document.body.style.top = `-${window.scrollY}px`;
+
+			// Get the last clicked Image id
+			setLastClickedImageId(allImages[imageIndex].src.split("/assets/")[1]);
+			// Focus the modal
+			dialogRef.current?.focus();
 		} else {
-			body.classList.remove("no-scroll");
+			// Restore the scroll
+			const scrollY = document.body.style.top;
+			document.body.style.position = "";
+			document.body.style.top = "";
+			window.scrollTo(0, parseInt(scrollY || "0") * -1);
+
+			// Restore the focus to the last clicked image
+			const postContentElement = document.getElementById("post-content");
+			const allImagesElements =
+				postContentElement?.querySelectorAll<HTMLImageElement>("img");
+			if (!allImagesElements) return;
+			const lastClickedImageElement = [...allImagesElements].find((img) =>
+				img.src.includes(lastClickedImageId),
+			);
+			lastClickedImageElement?.closest("button")?.focus();
 		}
 	}, [isOpen]);
 
@@ -48,6 +67,17 @@ export default function GalleryModal({
 			return setImageIndex(allImages.length - 1);
 		}
 		setImageIndex(imageIndex - 1);
+	};
+
+	// Handle keydown events for accessibility
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+		if (event.key === "Escape") {
+			setIsOpen(false);
+		} else if (event.key === "ArrowRight") {
+			handleNextImage();
+		} else if (event.key === "ArrowLeft") {
+			handlePreviousImage();
+		}
 	};
 
 	// Case: modal is closed
@@ -68,6 +98,10 @@ export default function GalleryModal({
 			aria-modal="true"
 			role="dialog"
 			aria-labelledby="galleryModalTitle"
+			aria-live="polite"
+			tabIndex={-1}
+			ref={dialogRef}
+			onKeyDown={handleKeyDown}
 		>
 			<h2 id="galleryModalTitle" className={style.visuallyHidden}>
 				Gallerie de photos
@@ -75,6 +109,7 @@ export default function GalleryModal({
 			<button
 				className={`${style.button} ${style.previous}`}
 				onClick={handlePreviousImage}
+				aria-label="Image précédente"
 			>
 				{/* PREVIOUS */}
 				<svg
@@ -98,6 +133,7 @@ export default function GalleryModal({
 			<button
 				className={`${style.button} ${style.next}`}
 				onClick={handleNextImage}
+				aria-label="Image suivante"
 			>
 				{/* NEXT */}
 				<svg
@@ -113,6 +149,7 @@ export default function GalleryModal({
 			<button
 				className={`${style.button} ${style.close}`}
 				onClick={() => setIsOpen(false)}
+				aria-label="Fermer la gallerie"
 			>
 				{/* CLOSE */}
 				<svg
