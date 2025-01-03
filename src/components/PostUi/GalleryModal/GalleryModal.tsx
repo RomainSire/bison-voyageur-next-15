@@ -1,3 +1,4 @@
+import { useDrag } from "@use-gesture/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import style from "./GalleryModal.module.css";
@@ -80,6 +81,17 @@ export default function GalleryModal({
 		}
 	};
 
+	// Handle swipe gestures
+	const swipe = useDrag(({ swipe: [swipeX, swipeY] }) => {
+		if (swipeX === -1) {
+			handleNextImage();
+		} else if (swipeX === 1) {
+			handlePreviousImage();
+		} else if (swipeY === 1) {
+			setIsOpen(false);
+		}
+	});
+
 	// Case: modal is closed
 	if (!isOpen) {
 		return null;
@@ -102,6 +114,7 @@ export default function GalleryModal({
 			tabIndex={-1}
 			ref={dialogRef}
 			onKeyDown={handleKeyDown}
+			{...swipe()}
 		>
 			<h2 id="galleryModalTitle" className={style.visuallyHidden}>
 				Gallerie de photos

@@ -5,6 +5,7 @@
 	z-index: 100;
 	display: grid;
 	place-items: center;
+	touch-action: pinch-zoom;
 }
 .image {
 	margin-inline: auto;
