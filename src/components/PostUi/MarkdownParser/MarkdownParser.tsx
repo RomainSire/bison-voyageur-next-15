@@ -1,3 +1,4 @@
+import { memo } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import PostImage from "../PostImage/PostImage";
 
@@ -6,10 +7,7 @@ type ParseContentType = {
 	onImageClick?: (image: { src: string; alt: string }) => void;
 };
 
-export default function MarkdownParser({
-	markdown,
-	onImageClick,
-}: ParseContentType) {
+const MarkdownParser = ({ markdown, onImageClick }: ParseContentType) => {
 	const components: Partial<Components> = {
 		p: ({ node, children }) => {
 			// Case: Image
@@ -33,4 +31,10 @@ export default function MarkdownParser({
 	};
 
 	return <ReactMarkdown components={components}>{markdown}</ReactMarkdown>;
-}
+};
+
+// Memoize the component to prevent unnecessary re-renders
+export default memo(
+	MarkdownParser,
+	(prevProps, nextProps) => prevProps.markdown === nextProps.markdown,
+);
