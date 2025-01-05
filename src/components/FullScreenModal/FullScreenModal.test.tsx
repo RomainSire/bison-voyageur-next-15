@@ -33,7 +33,11 @@ describe("FullScreenModal Component", () => {
 
 	test("renders correctly when isOpen is true", () => {
 		render(
-			<FullScreenModal isOpen={true} onClose={onClose}>
+			<FullScreenModal
+				isOpen={true}
+				onClose={onClose}
+				accessibilityTitle="Modal"
+			>
 				<div>Modal Content</div>
 			</FullScreenModal>,
 		);
@@ -42,7 +46,11 @@ describe("FullScreenModal Component", () => {
 
 	test("does not render when isOpen is false", () => {
 		render(
-			<FullScreenModal isOpen={false} onClose={onClose}>
+			<FullScreenModal
+				isOpen={false}
+				onClose={onClose}
+				accessibilityTitle="Modal"
+			>
 				<div>Modal Content</div>
 			</FullScreenModal>,
 		);
@@ -53,7 +61,11 @@ describe("FullScreenModal Component", () => {
 	test("calls onClose when close button is clicked", async () => {
 		const user = userEvent.setup();
 		render(
-			<FullScreenModal isOpen={true} onClose={onClose}>
+			<FullScreenModal
+				isOpen={true}
+				onClose={onClose}
+				accessibilityTitle="Modal"
+			>
 				<div>Modal Content</div>
 			</FullScreenModal>,
 		);

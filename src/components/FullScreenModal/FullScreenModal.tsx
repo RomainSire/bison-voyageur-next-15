@@ -12,16 +12,19 @@ type ModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
 	children: ReactNode;
+	accessibilityTitle: string;
 };
 
 export default function FullScreenModal({
 	isOpen,
 	onClose,
 	children,
+	accessibilityTitle,
 }: ModalProps) {
 	const dialogRef = useRef<HTMLDialogElement>(null);
 	// Using a ref for isOpenRef, because for some reason, onAnimationComplete function is called with an old version of isOpen. With a ref, the isOpen state is up to date in the onAnimationComplete function.
 	const isOpenRef = useRef(isOpen);
+	const triggerRef = useRef<HTMLElement | null>(null);
 
 	/**
 	 * Handle the dialog opening and closing
@@ -33,8 +36,11 @@ export default function FullScreenModal({
 			if (isOpen) {
 				disableBodyScroll(dialog);
 				dialog.showModal();
+				triggerRef.current = document.activeElement as HTMLElement;
+				dialog.focus();
 			} else {
 				enableBodyScroll(dialog);
+				triggerRef.current?.focus();
 			}
 		}
 		return () => {
@@ -53,7 +59,16 @@ export default function FullScreenModal({
 	});
 
 	return (
-		<dialog className={style.dialog} ref={dialogRef}>
+		<dialog
+			className={style.dialog}
+			ref={dialogRef}
+			onClose={onClose}
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="full-screen-modal-title"
+			aria-describedby="full-screen-modal-description"
+			tabIndex={-1}
+		>
 			<AnimatePresence>
 				{isOpen && (
 					<motion.div
@@ -62,7 +77,7 @@ export default function FullScreenModal({
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: 300 }}
 						transition={{ duration: 0.2 }}
-						key="dialog"
+						key="fullScreenModalDrawer"
 						onAnimationComplete={() => {
 							if (!isOpenRef.current && dialogRef.current) {
 								dialogRef.current.close();
@@ -72,12 +87,21 @@ export default function FullScreenModal({
 						dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
 						{...(bind() as HTMLMotionProps<"div">)}
 					>
-						{children}
+						<h2 id="full-screen-modal-title" className="visuallyHidden">
+							{accessibilityTitle}
+						</h2>
+						<div
+							id="full-screen-modal-description"
+							className={style.description}
+						>
+							{children}
+						</div>
 						<motion.button
 							className={style.closeButton}
 							onClick={onClose}
 							whileTap={{ scale: 0.9 }}
 							whileHover={{ scale: 1.3, rotate: 90 }}
+							aria-label="Fermer la modale"
 						>
 							{/* Close button */}
 							<svg
