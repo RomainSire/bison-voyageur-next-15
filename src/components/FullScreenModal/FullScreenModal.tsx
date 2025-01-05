@@ -1,0 +1,98 @@
+import {
+	clearAllBodyScrollLocks,
+	disableBodyScroll,
+	enableBodyScroll,
+} from "@/lib/bodyScrollLock";
+import { useDrag } from "@use-gesture/react";
+import { AnimatePresence, HTMLMotionProps, motion } from "motion/react";
+import { ReactNode, useEffect, useRef } from "react";
+import style from "./FullScreenModal.module.css";
+
+type ModalProps = {
+	isOpen: boolean;
+	onClose: () => void;
+	children: ReactNode;
+};
+
+export default function FullScreenModal({
+	isOpen,
+	onClose,
+	children,
+}: ModalProps) {
+	const dialogRef = useRef<HTMLDialogElement>(null);
+	// Using a ref for isOpenRef, because for some reason, onAnimationComplete function is called with an old version of isOpen. With a ref, the isOpen state is up to date in the onAnimationComplete function.
+	const isOpenRef = useRef(isOpen);
+
+	/**
+	 * Handle the dialog opening and closing
+	 */
+	useEffect(() => {
+		isOpenRef.current = isOpen;
+		const dialog = dialogRef.current;
+		if (dialog) {
+			if (isOpen) {
+				disableBodyScroll(dialog);
+				dialog.showModal();
+			} else {
+				enableBodyScroll(dialog);
+			}
+		}
+		return () => {
+			clearAllBodyScrollLocks();
+		};
+	}, [isOpen]);
+
+	/**
+	 * Handle the swipe gesture to close the dialog
+	 */
+	const bind = useDrag(({ swipe: [swipeX, swipeY] }) => {
+		if (swipeY === 1) {
+			onClose();
+			dialogRef.current?.close();
+		}
+	});
+
+	return (
+		<dialog className={style.dialog} ref={dialogRef}>
+			<AnimatePresence>
+				{isOpen && (
+					<motion.div
+						className={style.drawer}
+						initial={{ opacity: 0, y: 300 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: 300 }}
+						transition={{ duration: 0.2 }}
+						key="dialog"
+						onAnimationComplete={() => {
+							if (!isOpenRef.current && dialogRef.current) {
+								dialogRef.current.close();
+							}
+						}}
+						drag="y"
+						dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+						{...(bind() as HTMLMotionProps<"div">)}
+					>
+						{children}
+						<motion.button
+							className={style.closeButton}
+							onClick={onClose}
+							whileTap={{ scale: 0.9 }}
+							whileHover={{ scale: 1.3, rotate: 90 }}
+						>
+							{/* Close button */}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="32"
+								height="32"
+								fill="currentColor"
+								viewBox="0 0 256 256"
+							>
+								<path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+							</svg>
+						</motion.button>
+					</motion.div>
+				)}
+			</AnimatePresence>
+		</dialog>
+	);
+}
