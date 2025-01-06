@@ -1,0 +1,64 @@
+.image {
+	margin-inline: auto;
+	max-height: 95vh;
+	max-width: 95vw;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+
+	position: absolute;
+}
+.button {
+	all: unset;
+	position: absolute;
+	cursor: pointer;
+	color: var(--color-neutral-100);
+	padding: 2rem;
+	top: 50%;
+	padding: 1.5rem;
+	z-index: 10;
+}
+.button.next {
+	right: 0;
+}
+.button.previous {
+	left: 0;
+}
+.button:focus-visible {
+	outline: 3px solid var(--color-accent);
+	outline-offset: 2px;
+}
+
+.pagination {
+	--dot-size: 0.7rem;
+	position: absolute;
+	bottom: 1rem;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	gap: 0.3rem;
+	align-items: center;
+	z-index: 10;
+}
+.pagination .dot {
+	all: unset;
+	cursor: pointer;
+	width: var(--dot-size);
+	height: var(--dot-size);
+	border-radius: var(--dot-size);
+	background-color: var(--color-neutral-500);
+	transition: background-color 0.2s;
+}
+.pagination .dot:hover {
+	background-color: var(--color-neutral-100);
+}
+.pagination .dot.active {
+	width: calc(var(--dot-size) * 2.5);
+	background-color: var(--color-neutral-100);
+}
+
+@media screen and (max-width: 768px) {
+	.pagination {
+		display: none;
+	}
+}
