@@ -5,6 +5,7 @@
 	max-height: 100vh;
 	border: none;
 	background-color: transparent;
+	overflow: hidden;
 }
 .drawer {
 	--color-drawer: color-mix(in srgb, var(--color-neutral-900) 90%, transparent);
