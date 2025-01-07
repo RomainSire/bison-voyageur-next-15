@@ -3,8 +3,8 @@ import {
 	disableBodyScroll,
 	enableBodyScroll,
 } from "@/lib/bodyScrollLock";
-import { useDrag } from "@use-gesture/react";
-import { AnimatePresence, HTMLMotionProps, motion } from "motion/react";
+import { handleVerticalSwipe } from "@/lib/swipeGestureEvent";
+import { AnimatePresence, motion } from "motion/react";
 import { ReactNode, useEffect, useRef } from "react";
 import style from "./FullScreenModal.module.css";
 
@@ -48,16 +48,6 @@ export default function FullScreenModal({
 		};
 	}, [isOpen]);
 
-	/**
-	 * Handle the swipe gesture to close the dialog
-	 */
-	const bind = useDrag(({ swipe: [swipeX, swipeY] }) => {
-		if (swipeY === 1) {
-			onClose();
-			dialogRef.current?.close();
-		}
-	});
-
 	return (
 		<dialog
 			className={style.dialog}
@@ -84,8 +74,15 @@ export default function FullScreenModal({
 							}
 						}}
 						drag="y"
-						dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-						{...(bind() as HTMLMotionProps<"div">)}
+						dragConstraints={{ top: 0, bottom: 0 }}
+						dragElastic={1}
+						onDragEnd={(e, { offset, velocity }) => {
+							const swipeY = handleVerticalSwipe(e, { offset, velocity });
+							if (swipeY === -1) {
+								onClose();
+								dialogRef.current?.close();
+							}
+						}}
 					>
 						<h2 id="full-screen-modal-title" className="visuallyHidden">
 							{accessibilityTitle}

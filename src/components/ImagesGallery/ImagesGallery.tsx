@@ -1,3 +1,4 @@
+import { handleHorizontalSwipe } from "@/lib/swipeGestureEvent";
 import { wrap } from "@/lib/wrap";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
@@ -30,11 +31,6 @@ const variants = {
 			opacity: 0,
 		};
 	},
-};
-
-const swipeConfidenceThreshold = 10000;
-const swipePower = (offset: number, velocity: number) => {
-	return Math.abs(offset) * velocity;
 };
 
 export default function ImagesGallery({
@@ -79,12 +75,8 @@ export default function ImagesGallery({
 					dragConstraints={{ left: 0, right: 0 }}
 					dragElastic={1}
 					onDragEnd={(e, { offset, velocity }) => {
-						const swipe = swipePower(offset.x, velocity.x);
-						if (swipe < -swipeConfidenceThreshold) {
-							paginate(1);
-						} else if (swipe > swipeConfidenceThreshold) {
-							paginate(-1);
-						}
+						const swipeX = handleHorizontalSwipe(e, { offset, velocity });
+						paginate(swipeX);
 					}}
 					role="img"
 					aria-label={`Image ${imageIndex + 1} sur ${allImages.length}`}
