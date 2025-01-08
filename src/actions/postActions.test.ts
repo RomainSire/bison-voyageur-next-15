@@ -1,4 +1,4 @@
-import directus from "@/lib/directus";
+import directus from "@/lib/directusSDK/directus";
 import { readItem, readItems } from "@directus/sdk";
 import {
 	getAllPosts,
@@ -10,7 +10,7 @@ import {
 } from "./postsActions";
 
 // Mock the directus request and readItem
-jest.mock("@/lib/directus", () => ({
+jest.mock("@/lib/directusSDK/directus", () => ({
 	request: jest.fn(),
 }));
 jest.mock("@directus/sdk", () => ({

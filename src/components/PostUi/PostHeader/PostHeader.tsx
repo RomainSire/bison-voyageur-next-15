@@ -1,5 +1,5 @@
 "use client";
-import directus from "@/lib/directus";
+import directus from "@/lib/directusSDK/directus";
 import { PostSchema } from "@/Schemas/PostSchema";
 import { motion } from "motion/react";
 import Image from "next/image";

@@ -1,5 +1,5 @@
-import { handleHorizontalSwipe } from "@/lib/swipeGestureEvent";
-import { wrap } from "@/lib/wrap";
+import { handleHorizontalSwipe } from "@/lib/swipeGestureHelper/swipeGestureHelper";
+import { wrap } from "@/lib/wrap/wrap";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";

@@ -1,6 +1,6 @@
 "use server";
 
-import directus from "@/lib/directus";
+import directus from "@/lib/directusSDK/directus";
 import { PostSchema, PostSchemaLight } from "@/Schemas/PostSchema";
 import { readItem, readItems } from "@directus/sdk";
 

@@ -2,7 +2,7 @@
 import FormatedDate from "@/components/FormatedDate/FormatedDate";
 import FullScreenModal from "@/components/FullScreenModal/FullScreenModal";
 import ImagesGallery from "@/components/ImagesGallery/ImagesGallery";
-import { getAllImagesFromMarkdown } from "@/lib/postHelper";
+import { getAllImagesFromMarkdown } from "@/lib/postHelper/postHelper";
 import { PostSchema } from "@/Schemas/PostSchema";
 import { motion } from "motion/react";
 import { useState } from "react";

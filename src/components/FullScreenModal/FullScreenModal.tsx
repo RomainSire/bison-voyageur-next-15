@@ -2,8 +2,8 @@ import {
 	clearAllBodyScrollLocks,
 	disableBodyScroll,
 	enableBodyScroll,
-} from "@/lib/bodyScrollLock";
-import { handleVerticalSwipe } from "@/lib/swipeGestureEvent";
+} from "@/lib/bodyScrollLock/bodyScrollLock";
+import { handleVerticalSwipe } from "@/lib/swipeGestureHelper/swipeGestureHelper";
 import { AnimatePresence, motion } from "motion/react";
 import { ReactNode, useEffect, useRef } from "react";
 import style from "./FullScreenModal.module.css";
