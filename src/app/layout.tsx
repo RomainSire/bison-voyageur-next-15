@@ -23,8 +23,8 @@ export default function RootLayout({
 	return (
 		<html lang="fr">
 			<body className={`${sriracha.variable} ${style.body}`}>
-				<main className={style.main}>{children}</main>
 				<Header className={style.header} />
+				<main className={style.main}>{children}</main>
 			</body>
 		</html>
 	);
