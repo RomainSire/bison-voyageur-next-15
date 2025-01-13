@@ -2,8 +2,6 @@
  * Get all images from a markdown string
  * @param postContent - The content of the post
  * @returns An array of objects containing the src and alt of each image
- *
- * TODO: Unit tests !
  */
 export function getAllImagesFromMarkdown(postContent: string) {
 	return (
