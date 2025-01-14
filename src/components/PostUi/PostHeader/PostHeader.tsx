@@ -19,7 +19,7 @@ export default function PostHeader({
 	motionInitialDelay = 0,
 }: PostHeaderProps) {
 	return (
-		<div className={`${style.wrapper} ${className ?? ""}`}>
+		<header className={`${style.wrapper} ${className ?? ""}`}>
 			<MotionImage
 				src={`${directus.url}assets/${post.mainPicture.filename_disk}`}
 				alt={post.mainPictureAlt}
@@ -50,6 +50,6 @@ export default function PostHeader({
 			>
 				{post.title}
 			</motion.h1>
-		</div>
+		</header>
 	);
 }

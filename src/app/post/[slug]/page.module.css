@@ -4,16 +4,21 @@
 	--content-gap: 0.8rem;
 	--text-width: 60ch;
 
+	--content-box-width: min(95%, calc(var(--text-width) + var(--content-padding-inline) * 2));
+
 	display: grid;
 	place-items: center;
 	gap: 6rem;
 }
 .header {
-	width: min(95%, calc(var(--text-width) + var(--content-padding-inline) * 2));
+	width: var(--content-box-width);
 	margin-top: 5rem;
 }
 .content {
-	width: min(95%, calc(var(--text-width) + var(--content-padding-inline) * 2));
+	width: var(--content-box-width);
+}
+.footer {
+	width: var(--content-box-width);
 }
 
 @media (min-width: 768px) {

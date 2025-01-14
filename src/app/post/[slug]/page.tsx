@@ -1,5 +1,6 @@
 import { getAllPosts, getPostBySlug } from "@/actions/postsActions";
 import PostContent from "@/components/PostUi/PostContent/PostContent";
+import PostFooter from "@/components/PostUi/PostFooter/PostFooter";
 import PostHeader from "@/components/PostUi/PostHeader/PostHeader";
 import { REVALIDATE_TIME } from "@/publicConfig";
 import style from "./page.module.css";
@@ -31,15 +32,21 @@ export async function generateStaticParams() {
 export default async function PostPage({ params }: PostPageProps) {
 	const slug = (await params).slug;
 	const post = await getPostBySlug(slug);
+	const allPosts = await getAllPosts();
 
 	return (
-		<div className={style.wrapper}>
+		<article className={style.wrapper}>
 			<PostHeader post={post} className={style.header} />
 			<PostContent
 				post={post}
 				className={style.content}
 				motionInitialDelay={0.2}
 			/>
-		</div>
+			<PostFooter
+				className={style.footer}
+				allPosts={allPosts}
+				currentPost={post}
+			/>
+		</article>
 	);
 }

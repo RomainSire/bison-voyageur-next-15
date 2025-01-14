@@ -1,0 +1,15 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: 'previous next';
+	gap: 1rem;
+}
+.card {
+	background-color: var(--color-neutral-100);
+}
+.previous {
+	grid-area: previous;
+}
+.next {
+	grid-area: next;
+}
