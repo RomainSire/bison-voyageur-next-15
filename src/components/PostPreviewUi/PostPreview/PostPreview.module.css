@@ -5,6 +5,7 @@
 	box-shadow: 0 0 0.5rem 0 var(--color-neutral-900);
 	padding: 7px;
 	background-color: var(--color-neutral-100);
+	position: relative;
 }
 .cardImage {
 	aspect-ratio: 1;

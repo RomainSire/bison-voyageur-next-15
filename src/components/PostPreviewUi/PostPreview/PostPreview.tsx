@@ -4,6 +4,7 @@ import { PostSchemaLight } from "@/Schemas/PostSchema";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { ReactNode } from "react";
 import FormatedDate from "../../FormatedDate/FormatedDate";
 import style from "./PostPreview.module.css";
 
@@ -12,6 +13,7 @@ type PostPreviewProps = {
 	className?: string;
 	motionInitialX?: number;
 	motionInitialDelay?: number;
+	children?: ReactNode;
 };
 
 const MotionLink = motion.create(Link);
@@ -21,6 +23,7 @@ export default function PostPreview({
 	className,
 	motionInitialX = 0,
 	motionInitialDelay = 0,
+	children,
 }: PostPreviewProps) {
 	// random angle between -3 and 3
 	const angle = Math.random() * 10 - 3;
@@ -49,6 +52,7 @@ export default function PostPreview({
 				/>
 				<h2 className={style.cardTitle}>{post.title}</h2>
 				<FormatedDate date={post.date} className={style.cardDate} />
+				{children}
 			</article>
 		</MotionLink>
 	);
