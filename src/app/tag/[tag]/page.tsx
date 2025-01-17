@@ -1,4 +1,5 @@
 import { getAllTags, getPostsByTag } from "@/actions/postsActions";
+import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
 import { REVALIDATE_TIME } from "@/publicConfig";
 import style from "./page.module.css";
@@ -32,7 +33,9 @@ export default async function TagPage({ params }: TagPageProps) {
 
 	return (
 		<div className={style.wrapper}>
-			<h1 className={`${style.mainTitle} entryAnimation`}>Tag: {decodedTag}</h1>
+			<AnimatedTitle className={style.mainTitle} type="h1">
+				Tag: {decodedTag}
+			</AnimatedTitle>
 			<PostPreviewList posts={taggedPosts} motionInitialDelay={0.1} />
 		</div>
 	);

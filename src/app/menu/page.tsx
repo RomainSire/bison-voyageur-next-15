@@ -1,6 +1,7 @@
 import { getAllPosts, getAllTags } from "@/actions/postsActions";
 import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
 
+import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import TagList from "@/components/TagsUi/TagList/TagList";
 import { REVALIDATE_TIME } from "@/publicConfig";
 import style from "./page.module.css";
@@ -19,17 +20,30 @@ export default async function MainMenuPage() {
 
 	return (
 		<div className={style.wrapper}>
-			<h1 className={`${style.mainTitle} entryAnimation`}>Menu général</h1>
+			<AnimatedTitle className={style.mainTitle} type="h1">
+				Menu général
+			</AnimatedTitle>
+			<section>
+				<AnimatedTitle
+					className={style.subTitle}
+					type="h2"
+					motionInitialDelay={0.1}
+				>
+					Tous les tags
+				</AnimatedTitle>
+				<TagList tags={allTags} motionInitialDelay={0.2} />
+			</section>
 
-			<h2 className={`${style.subTitle} entryAnimation delay2`}>
-				Tous les tags
-			</h2>
-			<TagList tags={allTags} motionInitialDelay={0.25} />
-
-			<h2 className={`${style.subTitle} entryAnimation delay6`}>
-				Tous les posts
-			</h2>
-			<PostPreviewList posts={allPosts} motionInitialDelay={0.7} />
+			<section>
+				<AnimatedTitle
+					className={style.subTitle}
+					type="h2"
+					motionInitialDelay={0.5}
+				>
+					Tous les posts
+				</AnimatedTitle>
+				<PostPreviewList posts={allPosts} motionInitialDelay={0.6} />
+			</section>
 		</div>
 	);
 }

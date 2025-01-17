@@ -1,8 +1,9 @@
-.wrapper {
+.wrapper > section {
 	display: grid;
 	place-items: center;
 }
 .mainTitle {
+	text-align: center;
 	margin-top: 5rem;
 }
 .subTitle {
