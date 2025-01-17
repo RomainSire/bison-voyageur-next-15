@@ -1,5 +1,5 @@
+import PostPreview from "@/components/PostPreviewUi/PostPreview/PostPreview";
 import type { PostSchema, PostSchemaLight } from "@/Schemas/PostSchema";
-import Link from "next/link";
 import style from "./PostFooter.module.css";
 
 type PrevNextPostProps = Readonly<{
@@ -32,20 +32,24 @@ export default function PostFooter({
 	return (
 		<footer className={`${style.wrapper} ${className ?? ""}`}>
 			{previousPostIndex !== null && (
-				<Link
-					className={`${style.card} ${style.previous}`}
-					href={`/post/${sortedPost[previousPostIndex].slug}`}
+				<PostPreview
+					post={sortedPost[previousPostIndex]}
+					motionInitialX={-100}
+					motionInitialDelay={0.3}
 				>
-					{sortedPost[previousPostIndex].title}
-				</Link>
+					<div className={`${style.indicator} ${style.previous}`}>
+						Précédemment...
+					</div>
+				</PostPreview>
 			)}
 			{nextPostIndex !== null && (
-				<Link
-					className={`${style.card} ${style.next}`}
-					href={`/post/${sortedPost[nextPostIndex].slug}`}
+				<PostPreview
+					post={sortedPost[nextPostIndex]}
+					motionInitialX={100}
+					motionInitialDelay={0.4}
 				>
-					{sortedPost[nextPostIndex].title}
-				</Link>
+					<div className={`${style.indicator} ${style.next}`}>À suivre...</div>
+				</PostPreview>
 			)}
 		</footer>
 	);
