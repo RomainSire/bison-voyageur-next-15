@@ -2,6 +2,7 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 1rem;
+	place-items: center;
 }
 .indicator {
 	position: absolute;
@@ -11,13 +12,30 @@
 	padding: 1em 1.5em;
 	border: solid var(--color-neutral-900);
 }
-.indicator.previous {
-	left: -2em;
+.previous .indicator {
+	left: -8%;
 	border-width: 2px 3px 4px 2px;
 	border-radius: 10% 15% 8% 12%/11% 10% 6% 11%;
 }
-.indicator.next {
-	right: -2em;
+.next .indicator {
+	right: -8%;
 	border-width: 2px 3px 3px 2px;
 	border-radius: 15% 10% 12% 8%/10% 11% 11% 6%;
+}
+
+@media screen and (max-width: 768px) {
+	.wrapper {
+		grid-template-columns: 1fr;
+	}
+	.postPreview {
+		width: 80%;
+		max-width: 300px;
+	}
+	.next {
+		order: 1;
+	}
+	.previous {
+		order: 2;
+	}
+
 }

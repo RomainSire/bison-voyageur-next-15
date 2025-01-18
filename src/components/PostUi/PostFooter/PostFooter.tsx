@@ -33,22 +33,22 @@ export default function PostFooter({
 		<footer className={`${style.wrapper} ${className ?? ""}`}>
 			{previousPostIndex !== null && (
 				<PostPreview
+					className={`${style.postPreview} ${style.previous}`}
 					post={sortedPost[previousPostIndex]}
 					motionInitialX={-100}
 					motionInitialDelay={0.3}
 				>
-					<div className={`${style.indicator} ${style.previous}`}>
-						Précédemment...
-					</div>
+					<div className={style.indicator}>Précédemment...</div>
 				</PostPreview>
 			)}
 			{nextPostIndex !== null && (
 				<PostPreview
+					className={`${style.postPreview}  ${style.next}`}
 					post={sortedPost[nextPostIndex]}
 					motionInitialX={100}
 					motionInitialDelay={0.4}
 				>
-					<div className={`${style.indicator} ${style.next}`}>À suivre...</div>
+					<div className={style.indicator}>À suivre...</div>
 				</PostPreview>
 			)}
 		</footer>
