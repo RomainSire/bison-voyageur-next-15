@@ -1,7 +1,6 @@
 .link {
 	display: block;
 	width: 300px;
-	border: 1px solid var(--color-neutral-900);
 	box-shadow: 0 0 0.5rem 0 var(--color-neutral-900);
 	padding: 7px;
 	background-color: var(--color-neutral-100);
