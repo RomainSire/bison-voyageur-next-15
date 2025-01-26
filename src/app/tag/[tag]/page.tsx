@@ -2,6 +2,7 @@ import { getAllTags, getPostsByTag } from "@/actions/postsActions";
 import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
 import { REVALIDATE_TIME } from "@/publicConfig";
+import { notFound } from "next/navigation";
 import style from "./page.module.css";
 
 type TagPageProps = {
@@ -30,6 +31,10 @@ export default async function TagPage({ params }: TagPageProps) {
 	const tag = (await params).tag;
 	const decodedTag = decodeURIComponent(tag);
 	const taggedPosts = await getPostsByTag(decodedTag);
+
+	if (taggedPosts.length === 0) {
+		notFound();
+	}
 
 	return (
 		<div className={style.wrapper}>

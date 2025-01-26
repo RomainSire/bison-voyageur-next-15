@@ -3,6 +3,7 @@ import PostContent from "@/components/PostUi/PostContent/PostContent";
 import PostFooter from "@/components/PostUi/PostFooter/PostFooter";
 import PostHeader from "@/components/PostUi/PostHeader/PostHeader";
 import { REVALIDATE_TIME } from "@/publicConfig";
+import { notFound } from "next/navigation";
 import style from "./page.module.css";
 
 type PostPageProps = {
@@ -32,6 +33,11 @@ export async function generateStaticParams() {
 export default async function PostPage({ params }: PostPageProps) {
 	const slug = (await params).slug;
 	const post = await getPostBySlug(slug);
+
+	if (!post) {
+		notFound();
+	}
+
 	const allPosts = await getAllPosts();
 
 	return (

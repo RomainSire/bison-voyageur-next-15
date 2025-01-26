@@ -66,7 +66,7 @@ export async function getPostBySlug(slug: string) {
 	const allPosts = await getAllPosts();
 	const postSummary = allPosts.find((post) => post.slug === slug);
 	if (!postSummary) {
-		throw new Error("Post not found");
+		return null;
 	}
 	return getPostById(postSummary.id);
 }
