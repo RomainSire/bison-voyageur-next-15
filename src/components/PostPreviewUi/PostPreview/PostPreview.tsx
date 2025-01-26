@@ -4,7 +4,7 @@ import { PostSchemaLight } from "@/Schemas/PostSchema";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import FormatedDate from "../../FormatedDate/FormatedDate";
 import style from "./PostPreview.module.css";
 
@@ -25,8 +25,12 @@ export default function PostPreview({
 	motionInitialDelay = 0,
 	children,
 }: PostPreviewProps) {
-	// random angle between -3 and 3
-	const angle = Math.random() * 10 - 3;
+	const [angle, setAngle] = useState(0);
+
+	useEffect(() => {
+		// random angle between -3 and 3
+		setAngle(Math.random() * 10 - 3);
+	}, []);
 
 	return (
 		<MotionLink
