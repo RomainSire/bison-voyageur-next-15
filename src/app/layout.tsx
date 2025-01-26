@@ -1,4 +1,5 @@
 import Header from "@/components/Header/Header";
+import { LayoutTransition } from "@/components/LayoutTransition/LayoutTransition";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -23,8 +24,14 @@ export default function RootLayout({
 	return (
 		<html lang="fr">
 			<body className={`${sriracha.variable} ${style.body}`}>
-				<Header className={style.header} />
-				<main className={style.main}>{children}</main>
+				<LayoutTransition
+					initial={{ opacity: 1 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+				>
+					<Header className={style.header} />
+					<main className={style.main}>{children}</main>
+				</LayoutTransition>
 			</body>
 		</html>
 	);
