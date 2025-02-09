@@ -2,10 +2,37 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ImagesGallery from "./ImagesGallery";
 
-const mockImages = [
-	{ src: "/image1.jpg", alt: "Image 1" },
-	{ src: "/image2.jpg", alt: "Image 2" },
-	{ src: "/image3.jpg", alt: "Image 3" },
+const mockImages: any = [
+	{
+		sys: { id: "1" },
+		fields: {
+			title: "Image 1",
+			file: {
+				url: "//path/to/image-1.jpg",
+				details: { image: { width: 100, height: 100 } },
+			},
+		},
+	},
+	{
+		sys: { id: "2" },
+		fields: {
+			title: "Image 2",
+			file: {
+				url: "//path/to/image-2.jpg",
+				details: { image: { width: 100, height: 100 } },
+			},
+		},
+	},
+	{
+		sys: { id: "3" },
+		fields: {
+			title: "Image 3",
+			file: {
+				url: "//path/to/image-3.jpg",
+				details: { image: { width: 100, height: 100 } },
+			},
+		},
+	},
 ];
 
 describe("ImagesGallery", () => {

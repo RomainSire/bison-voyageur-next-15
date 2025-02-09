@@ -1,8 +1,10 @@
+import { TagType } from "@/Types/TagType";
+import { Entry } from "contentful";
 import Tag from "../Tag/Tag";
 import style from "./TagList.module.css";
 
 type TagListProps = {
-	tags: string[];
+	tags: Entry<TagType, undefined, string>[];
 	motionInitialDelay?: number;
 };
 
@@ -16,8 +18,8 @@ export default function TagList({
 				{tags.map((tag, index) => {
 					const selfDelay = (index + 1) * 0.1 + motionInitialDelay;
 					return (
-						<li key={tag}>
-							<Tag tag={tag} motionInitialDelay={selfDelay} />
+						<li key={tag.sys.id}>
+							<Tag tag={tag.fields.name} motionInitialDelay={selfDelay} />
 						</li>
 					);
 				})}
