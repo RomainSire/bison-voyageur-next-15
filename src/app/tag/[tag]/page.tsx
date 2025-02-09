@@ -1,7 +1,7 @@
-import { getAllTags, getPostsByTag } from "@/actions/postsActions";
 import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
 import { REVALIDATE_TIME } from "@/publicConfig";
+import { getAllTags, getPostsByTag } from "@/services/postService";
 import { notFound } from "next/navigation";
 import style from "./page.module.css";
 
@@ -21,7 +21,7 @@ export const revalidate = REVALIDATE_TIME;
  */
 export async function generateStaticParams() {
 	const tags = await getAllTags();
-	return tags.map((tag) => ({ tag }));
+	return tags.map((tag) => ({ tag: tag.fields.name }));
 }
 
 /**

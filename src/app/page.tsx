@@ -1,8 +1,8 @@
-import { getLastPosts } from "@/actions/postsActions";
 import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import MainHero from "@/components/MainHero/MainHero";
 import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
 import { REVALIDATE_TIME } from "@/publicConfig";
+import { getLastPosts } from "@/services/postService";
 import style from "./page.module.css";
 
 /**

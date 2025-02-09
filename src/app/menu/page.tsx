@@ -1,9 +1,9 @@
-import { getAllPosts, getAllTags } from "@/actions/postsActions";
 import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
 
 import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import TagList from "@/components/TagsUi/TagList/TagList";
 import { REVALIDATE_TIME } from "@/publicConfig";
+import { getAllPosts, getAllTags } from "@/services/postService";
 import style from "./page.module.css";
 
 /**
