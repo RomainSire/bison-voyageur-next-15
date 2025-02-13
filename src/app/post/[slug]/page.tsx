@@ -1,8 +1,11 @@
 import PostContent from "@/components/PostUi/PostContent/PostContent";
 import PostFooter from "@/components/PostUi/PostFooter/PostFooter";
 import PostHeader from "@/components/PostUi/PostHeader/PostHeader";
+import TagList from "@/components/TagsUi/TagList/TagList";
 import { REVALIDATE_TIME } from "@/publicConfig";
 import { getAllPosts, getPostBySlug } from "@/services/postService";
+import { TagType } from "@/Types/TagType";
+import { Entry } from "contentful";
 import { notFound } from "next/navigation";
 import style from "./page.module.css";
 
@@ -33,6 +36,7 @@ export async function generateStaticParams() {
 export default async function PostPage({ params }: PostPageProps) {
 	const slug = (await params).slug;
 	const post = await getPostBySlug(slug);
+	const postTags = post.fields.tags as Entry<TagType, undefined, string>[];
 
 	if (!post) {
 		notFound();
@@ -43,6 +47,7 @@ export default async function PostPage({ params }: PostPageProps) {
 	return (
 		<article className={style.wrapper}>
 			<PostHeader post={post} className={style.header} />
+			{postTags.length > 0 && <TagList tags={postTags} />}
 			<PostContent
 				post={post}
 				className={style.content}
