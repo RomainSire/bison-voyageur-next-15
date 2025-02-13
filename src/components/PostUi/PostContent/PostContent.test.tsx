@@ -1,40 +1,77 @@
-import { MainPictureSchema } from "@/Schemas/MainPictureSchema";
-import { PostSchema } from "@/Schemas/PostSchema";
+import { BLOCKS, Document } from "@contentful/rich-text-types";
 import { render, screen } from "@testing-library/react";
 import PostContent from "./PostContent";
 
-const mainPicture = {
-	filename_disk: "test-image.jpg",
-	width: 800,
-	height: 600,
-	title: "Test Image",
-} as MainPictureSchema;
-
-const mockPost: PostSchema = {
-	id: "1",
-	status: "published",
-	sort: 1,
-	date_created: "2024-12-01",
-	date_updated: "2024-12-01",
-	title: "Test Post",
-	slug: "test-post",
-	date: "2013-06-01",
-	tag: ["test"],
-	mainPicture: mainPicture,
-	mainPictureAlt: "Test Image",
-	summary: "This is a test post",
-	content: "This is the test post content",
+const content: Document = {
+	nodeType: BLOCKS.DOCUMENT,
+	content: [
+		{
+			nodeType: BLOCKS.PARAGRAPH,
+			content: [
+				{
+					nodeType: "text",
+					value: "Sample Content",
+					marks: [],
+					data: {},
+				},
+			],
+			data: {},
+		},
+	],
+	data: {},
 };
 
-jest.mock("../MarkdownParser/MarkdownParser", () => () => (
-	<div>Mocked Markdown Content</div>
-));
+const mockPost = {
+	sys: {
+		id: "1",
+	},
+	fields: {
+		title: "Sample Post",
+		slug: "sample-post",
+		date: "2013-06-01",
+		thumbnail: {
+			sys: {
+				id: "1",
+			},
+			fields: {
+				title: "Sample Image",
+				file: {
+					url: "//path/to/sample-image.jpg",
+					details: {
+						image: {
+							width: 100,
+							height: 100,
+						},
+					},
+				},
+			},
+		},
+		featuredImage: {
+			sys: {
+				id: "2",
+			},
+			fields: {
+				title: "Featured Image",
+				file: {
+					url: "//path/to/featured-image.jpg",
+					details: {
+						image: {
+							width: 200,
+							height: 200,
+						},
+					},
+				},
+			},
+		},
+		content,
+	},
+} as any;
 
 describe("PostContent Component", () => {
 	test("renders correctly with given post", () => {
 		render(<PostContent post={mockPost} />);
 
 		expect(screen.getByText("samedi 1 juin 2013")).toBeInTheDocument();
-		expect(screen.getByText("Mocked Markdown Content")).toBeInTheDocument();
+		expect(screen.getByText("Sample Content")).toBeInTheDocument();
 	});
 });

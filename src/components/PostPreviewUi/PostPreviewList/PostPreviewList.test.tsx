@@ -1,46 +1,69 @@
-import { PostSchemaLight } from "@/Schemas/PostSchema";
 import { render, screen } from "@testing-library/react";
 import PostPreviewList from "./PostPreviewList";
 
-const mockPosts: PostSchemaLight[] = [
+const mockPosts = [
 	{
-		id: "1",
-		slug: "post-1",
-		title: "Post 1",
-		date: "2023-01-01",
-		mainPicture: {
-			filename_disk: "image1.webp",
-			title: "Image 1",
-			height: 100,
-			width: 100,
+		sys: {
+			id: "1",
 		},
-		tag: ["tag1"],
-		summary: "Summary 1",
-		mainPictureAlt: "Image 1",
+		fields: {
+			title: "Sample Post 1",
+			slug: "sample-post-1",
+			date: "2024-12-01",
+			thumbnail: {
+				sys: {
+					id: "1",
+				},
+				fields: {
+					title: "Sample Image 1",
+					file: {
+						url: "//path/to/sample-image-1.jpg",
+						details: {
+							image: {
+								width: 100,
+								height: 100,
+							},
+						},
+					},
+				},
+			},
+		},
 	},
 	{
-		id: "2",
-		slug: "post-2",
-		title: "Post 2",
-		date: "2023-01-02",
-		mainPicture: {
-			filename_disk: "image2.webp",
-			title: "Image 2",
-			height: 100,
-			width: 100,
+		sys: {
+			id: "2",
 		},
-		tag: ["tag1"],
-		summary: "Summary 1",
-		mainPictureAlt: "Image 2",
+		fields: {
+			title: "Sample Post 2",
+			slug: "sample-post-2",
+			date: "2024-12-02",
+			thumbnail: {
+				sys: {
+					id: "2",
+				},
+				fields: {
+					title: "Sample Image 2",
+					file: {
+						url: "//path/to/sample-image-2.jpg",
+						details: {
+							image: {
+								width: 100,
+								height: 100,
+							},
+						},
+					},
+				},
+			},
+		},
 	},
-];
+] as any;
 
 describe("PostPreviewList", () => {
 	it("renders a list of posts", () => {
 		render(<PostPreviewList posts={mockPosts} />);
 
-		mockPosts.forEach((post) => {
-			expect(screen.getByText(post.title)).toBeInTheDocument();
+		mockPosts.forEach((post: any) => {
+			expect(screen.getByText(post.fields.title)).toBeInTheDocument();
 		});
 	});
 

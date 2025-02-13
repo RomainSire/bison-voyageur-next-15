@@ -1,23 +1,34 @@
-import { PostSchemaLight } from "@/Schemas/PostSchema";
 import { render, screen } from "@testing-library/react";
 import PostPreview from "./PostPreview";
 
 // Mock post object
-const mockPost: PostSchemaLight = {
-	id: "1",
-	slug: "sample-post",
-	title: "Sample Post",
-	date: "2024-12-01",
-	mainPicture: {
-		filename_disk: "sample-image.jpg",
-		title: "Sample Image",
-		width: 800,
-		height: 600,
+const mockPost = {
+	sys: {
+		id: "1",
 	},
-	tag: ["sample"],
-	summary: "This is a sample post",
-	mainPictureAlt: "Sample Image",
-};
+	fields: {
+		title: "Sample Post",
+		slug: "sample-post",
+		date: "2024-12-01",
+		thumbnail: {
+			sys: {
+				id: "1",
+			},
+			fields: {
+				title: "Sample Image",
+				file: {
+					url: "//path/to/sample-image.jpg",
+					details: {
+						image: {
+							width: 100,
+							height: 100,
+						},
+					},
+				},
+			},
+		},
+	},
+} as any;
 
 describe("PostPreview", () => {
 	it("should render the title correctly", () => {

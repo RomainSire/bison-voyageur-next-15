@@ -1,23 +1,52 @@
+import { TagType } from "@/Types/TagType";
 import { render, screen } from "@testing-library/react";
+import { Entry } from "contentful";
 import TagList from "./TagList";
+
+const mockedTags = [
+	{
+		sys: {
+			id: "1",
+		},
+		fields: {
+			name: "React",
+		},
+	},
+	{
+		sys: {
+			id: "2",
+		},
+		fields: {
+			name: "Next.js",
+		},
+	},
+	{
+		sys: {
+			id: "3",
+		},
+		fields: {
+			name: "JavaScript",
+		},
+	},
+] as Entry<TagType, undefined, string>[];
 
 describe("TagList Component", () => {
 	test("renders correctly with a list of tags", () => {
-		const tags = ["React", "Next.js", "JavaScript"];
-		render(<TagList tags={tags} />);
+		render(<TagList tags={mockedTags} />);
 
-		tags.forEach((tag) => {
-			expect(screen.getByText(tag)).toBeInTheDocument();
+		mockedTags.forEach((tag) => {
+			expect(screen.getByText(tag.fields.name)).toBeInTheDocument();
 		});
 	});
 
 	test("renders correctly with a list of tags and motionInitialDelay", () => {
-		const tags = ["React", "Next.js", "JavaScript"];
 		const motionInitialDelay = 0.5;
-		render(<TagList tags={tags} motionInitialDelay={motionInitialDelay} />);
+		render(
+			<TagList tags={mockedTags} motionInitialDelay={motionInitialDelay} />,
+		);
 
-		tags.forEach((tag) => {
-			expect(screen.getByText(tag)).toBeInTheDocument();
+		mockedTags.forEach((tag) => {
+			expect(screen.getByText(tag.fields.name)).toBeInTheDocument();
 		});
 	});
 });

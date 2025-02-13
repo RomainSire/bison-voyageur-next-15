@@ -1,12 +1,12 @@
 "use client";
-import directus from "@/lib/directusSDK/directus";
-import { PostSchema } from "@/Schemas/PostSchema";
+import { PostType } from "@/Types/PostType";
+import { Asset, AssetDetails, Entry } from "contentful";
 import { motion } from "motion/react";
 import Image from "next/image";
 import style from "./PostHeader.module.css";
 
 type PostHeaderProps = {
-	post: PostSchema;
+	post: Entry<PostType, undefined, string>;
 	className?: string;
 	motionInitialDelay?: number;
 };
@@ -18,13 +18,18 @@ export default function PostHeader({
 	className,
 	motionInitialDelay = 0,
 }: PostHeaderProps) {
+	const featuredImage = post.fields.featuredImage as Asset;
+	const featuredImageTitle = featuredImage.fields.title as string;
+	const featuredImageDetails = featuredImage.fields.file
+		?.details as AssetDetails;
+
 	return (
 		<header className={`${style.wrapper} ${className ?? ""}`}>
 			<MotionImage
-				src={`${directus.url}assets/${post.mainPicture.filename_disk}`}
-				alt={post.mainPictureAlt}
-				width={post.mainPicture.width ?? undefined}
-				height={post.mainPicture.height ?? undefined}
+				src={`https:${featuredImage.fields.file?.url}`}
+				alt={featuredImageTitle ?? ""}
+				width={featuredImageDetails.image?.width ?? undefined}
+				height={featuredImageDetails.image?.height ?? undefined}
 				className={style.image}
 				initial={{ x: -15, opacity: 0 }}
 				animate={{
@@ -48,7 +53,7 @@ export default function PostHeader({
 					},
 				}}
 			>
-				{post.title}
+				{post.fields.title}
 			</motion.h1>
 		</header>
 	);

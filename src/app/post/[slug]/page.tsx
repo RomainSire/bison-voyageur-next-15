@@ -1,8 +1,8 @@
-import { getAllPosts, getPostBySlug } from "@/actions/postsActions";
 import PostContent from "@/components/PostUi/PostContent/PostContent";
 import PostFooter from "@/components/PostUi/PostFooter/PostFooter";
 import PostHeader from "@/components/PostUi/PostHeader/PostHeader";
 import { REVALIDATE_TIME } from "@/publicConfig";
+import { getAllPosts, getPostBySlug } from "@/services/postService";
 import { notFound } from "next/navigation";
 import style from "./page.module.css";
 
@@ -23,7 +23,7 @@ export const revalidate = REVALIDATE_TIME;
 export async function generateStaticParams() {
 	const posts = await getAllPosts();
 	return posts.map((post) => ({
-		slug: post.slug,
+		slug: post.fields.slug,
 	}));
 }
 
@@ -38,7 +38,7 @@ export default async function PostPage({ params }: PostPageProps) {
 		notFound();
 	}
 
-	const allPosts = await getAllPosts();
+	const allPosts = await getAllPosts("asc");
 
 	return (
 		<article className={style.wrapper}>
