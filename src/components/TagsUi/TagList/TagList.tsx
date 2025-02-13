@@ -19,7 +19,7 @@ export default function TagList({
 					const selfDelay = (index + 1) * 0.1 + motionInitialDelay;
 					return (
 						<li key={tag.sys.id}>
-							<Tag tag={tag.fields.name} motionInitialDelay={selfDelay} />
+							<Tag tag={tag} motionInitialDelay={selfDelay} />
 						</li>
 					);
 				})}

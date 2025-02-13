@@ -3,7 +3,8 @@ import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPrev
 import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import TagList from "@/components/TagsUi/TagList/TagList";
 import { REVALIDATE_TIME } from "@/publicConfig";
-import { getAllPosts, getAllTags } from "@/services/postService";
+import { getAllPosts } from "@/services/postService";
+import { getAllTags } from "@/services/tagService";
 import style from "./page.module.css";
 
 /**

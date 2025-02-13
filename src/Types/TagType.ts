@@ -10,5 +10,9 @@ export interface TagType {
 		 * Name of the tag
 		 */
 		name: EntryFieldTypes.Text;
+		/**
+		 * Slug of the tag
+		 */
+		slug: EntryFieldTypes.Text;
 	};
 }
