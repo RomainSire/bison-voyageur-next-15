@@ -13,7 +13,9 @@ const sriracha = localFont({
 
 export const metadata: Metadata = {
 	title: "Bison Voyageur",
-	description: "Blog de mon voyage autour du monde",
+	description:
+		"Le blog photo de mon Tour du Monde: La concrétisation d'un rêve que j'avais depuis de nombreuses années. Découvertes, rencontres, et ouverture d'esprit étaient au programme.",
+	metadataBase: new URL("https://bisonvoyageur.com"),
 };
 
 export default function RootLayout({

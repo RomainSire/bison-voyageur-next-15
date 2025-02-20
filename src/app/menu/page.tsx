@@ -5,12 +5,19 @@ import TagList from "@/components/TagsUi/TagList/TagList";
 import { REVALIDATE_TIME } from "@/publicConfig";
 import { getAllPosts } from "@/services/postService";
 import { getAllTags } from "@/services/tagService";
+import { Metadata } from "next";
 import style from "./page.module.css";
 
 /**
  * Revalidate time in seconds
  */
 export const revalidate = REVALIDATE_TIME;
+
+export const metadata: Metadata = {
+	title: "Menu | Bison Voyageur",
+	description:
+		"Ici sont répertoriés tous les articles et tags du blog Bison Voyageur.",
+};
 
 /**
  * Main Menu Page component

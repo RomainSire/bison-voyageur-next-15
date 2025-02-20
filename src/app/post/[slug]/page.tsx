@@ -5,7 +5,8 @@ import TagList from "@/components/TagsUi/TagList/TagList";
 import { REVALIDATE_TIME } from "@/publicConfig";
 import { getAllPosts, getPostBySlug } from "@/services/postService";
 import { TagType } from "@/Types/TagType";
-import { Entry } from "contentful";
+import { Asset, Entry } from "contentful";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import style from "./page.module.css";
 
@@ -28,6 +29,25 @@ export async function generateStaticParams() {
 	return posts.map((post) => ({
 		slug: post.fields.slug,
 	}));
+}
+
+/**
+ * Generate the metadata for the post pages
+ */
+export async function generateMetadata({
+	params,
+}: PostPageProps): Promise<Metadata> {
+	const slug = (await params).slug;
+	const post = await getPostBySlug(slug);
+	const thumbnail = post.fields.thumbnail as Asset;
+
+	return {
+		title: `${post.fields.title} | Bison Voyageur`,
+		description: post.fields.summary,
+		openGraph: {
+			images: [`https:${thumbnail.fields.file?.url}`],
+		},
+	};
 }
 
 /**

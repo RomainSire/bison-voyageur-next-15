@@ -3,6 +3,7 @@ import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPrev
 import { REVALIDATE_TIME } from "@/publicConfig";
 import { getPostsByTag } from "@/services/postService";
 import { getAllTags, getTagBySlug } from "@/services/tagService";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import style from "./page.module.css";
 
@@ -23,6 +24,21 @@ export const revalidate = REVALIDATE_TIME;
 export async function generateStaticParams() {
 	const tags = await getAllTags();
 	return tags.map((tag) => ({ slug: tag.fields.slug }));
+}
+
+/**
+ * Generate the metadata for the tag pages
+ */
+export async function generateMetadata({
+	params,
+}: TagPageProps): Promise<Metadata> {
+	const tagSlug = (await params).slug;
+	const tag = await getTagBySlug(tagSlug);
+
+	return {
+		title: `Tag: ${tag.fields.name} | Bison Voyageur`,
+		description: `Tous les posts tagués avec "${tag.fields.name}".`,
+	};
 }
 
 /**
