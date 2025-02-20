@@ -34,6 +34,11 @@ export default function RootLayout({
 					<Header className={style.header} />
 					<main className={style.main}>{children}</main>
 				</LayoutTransition>
+				<script
+					defer
+					src="https://umami.romainsire.com/script.js"
+					data-website-id="ab18bb5c-b4e7-4148-90b8-a9e91cbc0553"
+				></script>
 			</body>
 		</html>
 	);
