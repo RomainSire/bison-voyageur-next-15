@@ -1,34 +1,26 @@
+import { createMockTag } from "@/lib/testUtils/testUtils";
 import { TagType } from "@/Types/TagType";
 import { render, screen } from "@testing-library/react";
 import { Entry } from "contentful";
 import TagList from "./TagList";
 
-const mockedTags = [
-	{
-		sys: {
-			id: "1",
-		},
-		fields: {
-			name: "React",
-		},
-	},
-	{
-		sys: {
-			id: "2",
-		},
-		fields: {
-			name: "Next.js",
-		},
-	},
-	{
-		sys: {
-			id: "3",
-		},
-		fields: {
-			name: "JavaScript",
-		},
-	},
-] as Entry<TagType, undefined, string>[];
+const mockedTags: Entry<TagType, undefined, string>[] = [
+	createMockTag({
+		id: "1",
+		name: "React",
+		slug: "react",
+	}),
+	createMockTag({
+		id: "2",
+		name: "Next.js",
+		slug: "next-js",
+	}),
+	createMockTag({
+		id: "3",
+		name: "JavaScript",
+		slug: "javascript",
+	}),
+];
 
 describe("TagList Component", () => {
 	test("renders correctly with a list of tags", () => {

@@ -1,93 +1,51 @@
+import { PostType, PostTypeLight } from "@/Types/PostType";
+import { createMockPost, createMockPostLight } from "@/lib/testUtils/testUtils";
 import { render, screen } from "@testing-library/react";
+import { Entry } from "contentful";
 import PostFooter from "./PostFooter";
 
-const mockAllPosts = [
-	{
-		sys: {
-			id: "1",
+const mockAllPosts: Entry<PostTypeLight, undefined, string>[] = [
+	createMockPostLight({
+		id: "1",
+		title: "Post 1",
+		slug: "post-1",
+		date: "2024-12-01T00:00:00Z",
+		thumbnail: {
+			title: "Image 1",
+			url: "//path/to/image.jpg",
+			fileName: "image.jpg",
 		},
-		fields: {
-			title: "Post 1",
-			slug: "post-1",
-			date: "2024-12-01",
-			thumbnail: {
-				sys: {
-					id: "1",
-				},
-				fields: {
-					title: "Image 1",
-					file: {
-						url: "//path/to/image.jpg",
-						details: {
-							image: {
-								width: 100,
-								height: 100,
-							},
-						},
-					},
-				},
-			},
+	}),
+	createMockPostLight({
+		id: "2",
+		title: "Post 2",
+		slug: "post-2",
+		date: "2024-12-02T00:00:00Z",
+		thumbnail: {
+			title: "Image 2",
+			url: "//path/to/image.jpg",
+			fileName: "image.jpg",
 		},
-	},
-	{
-		sys: {
-			id: "2",
+	}),
+	createMockPostLight({
+		id: "3",
+		title: "Post 3",
+		slug: "post-3",
+		date: "2024-12-03T00:00:00Z",
+		thumbnail: {
+			title: "Image 3",
+			url: "//path/to/image.jpg",
+			fileName: "image.jpg",
 		},
-		fields: {
-			title: "Post 2",
-			slug: "post-2",
-			date: "2024-12-02",
-			thumbnail: {
-				sys: {
-					id: "2",
-				},
-				fields: {
-					title: "Image 2",
-					file: {
-						url: "//path/to/image.jpg",
-						details: {
-							image: {
-								width: 100,
-								height: 100,
-							},
-						},
-					},
-				},
-			},
-		},
-	},
-	{
-		sys: {
-			id: "3",
-		},
-		fields: {
-			title: "Post 3",
-			slug: "post-3",
-			date: "2024-12-03",
-			thumbnail: {
-				sys: {
-					id: "3",
-				},
-				fields: {
-					title: "Image 3",
-					file: {
-						url: "//path/to/image.jpg",
-						details: {
-							image: {
-								width: 100,
-								height: 100,
-							},
-						},
-					},
-				},
-			},
-		},
-	},
-] as any;
+	}),
+];
 
 describe("PostFooter", () => {
 	it("should render correctly with previous and next posts", () => {
-		const mockCurrentPost = mockAllPosts[1] as any;
+		// Post 2 is the current post
+		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
+			id: "2",
+		});
 		render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,
 		);
@@ -99,7 +57,10 @@ describe("PostFooter", () => {
 	});
 
 	it("should render correctly with only previous post", () => {
-		const mockCurrentPost = mockAllPosts[2] as any;
+		// Post 3 is the current post
+		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
+			id: "3",
+		});
 
 		render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,
@@ -110,7 +71,10 @@ describe("PostFooter", () => {
 	});
 
 	it("should render correctly with only next post", () => {
-		const mockCurrentPost = mockAllPosts[0] as any;
+		// Post 1 is the current post
+		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
+			id: "1",
+		});
 
 		render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,
@@ -121,33 +85,10 @@ describe("PostFooter", () => {
 	});
 
 	it("should render null if current post is not found in all posts", () => {
-		const mockCurrentPost = {
-			sys: {
-				id: "4",
-			},
-			fields: {
-				title: "Post 4",
-				slug: "post-4",
-				date: "2024-12-04",
-				thumbnail: {
-					sys: {
-						id: "4",
-					},
-					fields: {
-						title: "Image 4",
-						file: {
-							url: "//path/to/image.jpg",
-							details: {
-								image: {
-									width: 100,
-									height: 100,
-								},
-							},
-						},
-					},
-				},
-			},
-		} as any;
+		// Current post is not in the list of all posts
+		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
+			id: "4",
+		});
 
 		const { container } = render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,

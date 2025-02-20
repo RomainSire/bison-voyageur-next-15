@@ -1,68 +1,37 @@
+import { PostTypeLight } from "@/Types/PostType";
+import { createMockPostLight } from "@/lib/testUtils/testUtils";
 import { render, screen } from "@testing-library/react";
+import { Entry } from "contentful";
 import PostPreviewList from "./PostPreviewList";
 
-const mockPosts = [
-	{
-		sys: {
-			id: "1",
+const mockPosts: Entry<PostTypeLight, undefined, string>[] = [
+	createMockPostLight({
+		id: "1",
+		title: "Sample Post 1",
+		slug: "sample-post-1",
+		date: "2024-12-01T00:00:00Z",
+		thumbnail: {
+			title: "Sample Image 1",
+			url: "//path/to/sample-image-1.jpg",
 		},
-		fields: {
-			title: "Sample Post 1",
-			slug: "sample-post-1",
-			date: "2024-12-01",
-			thumbnail: {
-				sys: {
-					id: "1",
-				},
-				fields: {
-					title: "Sample Image 1",
-					file: {
-						url: "//path/to/sample-image-1.jpg",
-						details: {
-							image: {
-								width: 100,
-								height: 100,
-							},
-						},
-					},
-				},
-			},
+	}),
+	createMockPostLight({
+		id: "2",
+		title: "Sample Post 2",
+		slug: "sample-post-2",
+		date: "2024-12-02T00:00:00Z",
+		thumbnail: {
+			title: "Sample Image 2",
+			url: "//path/to/sample-image-2.jpg",
 		},
-	},
-	{
-		sys: {
-			id: "2",
-		},
-		fields: {
-			title: "Sample Post 2",
-			slug: "sample-post-2",
-			date: "2024-12-02",
-			thumbnail: {
-				sys: {
-					id: "2",
-				},
-				fields: {
-					title: "Sample Image 2",
-					file: {
-						url: "//path/to/sample-image-2.jpg",
-						details: {
-							image: {
-								width: 100,
-								height: 100,
-							},
-						},
-					},
-				},
-			},
-		},
-	},
-] as any;
+	}),
+];
 
 describe("PostPreviewList", () => {
 	it("renders a list of posts", () => {
 		render(<PostPreviewList posts={mockPosts} />);
 
-		mockPosts.forEach((post: any) => {
+		mockPosts.forEach((post) => {
 			expect(screen.getByText(post.fields.title)).toBeInTheDocument();
 		});
 	});

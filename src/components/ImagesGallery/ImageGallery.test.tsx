@@ -1,38 +1,25 @@
+import { createMockAssetLink } from "@/lib/testUtils/testUtils";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { Asset } from "contentful";
 import ImagesGallery from "./ImagesGallery";
 
-const mockImages: any = [
-	{
-		sys: { id: "1" },
-		fields: {
-			title: "Image 1",
-			file: {
-				url: "//path/to/image-1.jpg",
-				details: { image: { width: 100, height: 100 } },
-			},
-		},
-	},
-	{
-		sys: { id: "2" },
-		fields: {
-			title: "Image 2",
-			file: {
-				url: "//path/to/image-2.jpg",
-				details: { image: { width: 100, height: 100 } },
-			},
-		},
-	},
-	{
-		sys: { id: "3" },
-		fields: {
-			title: "Image 3",
-			file: {
-				url: "//path/to/image-3.jpg",
-				details: { image: { width: 100, height: 100 } },
-			},
-		},
-	},
+const mockImages: Asset<undefined, string>[] = [
+	createMockAssetLink({
+		id: "1",
+		title: "Image 1",
+		url: "//path/to/image-1.jpg",
+	}),
+	createMockAssetLink({
+		id: "2",
+		title: "Image 2",
+		url: "//path/to/image-2.jpg",
+	}),
+	createMockAssetLink({
+		id: "3",
+		title: "Image 3",
+		url: "//path/to/image-3.jpg",
+	}),
 ];
 
 describe("ImagesGallery", () => {

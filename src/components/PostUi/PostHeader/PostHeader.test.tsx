@@ -1,71 +1,24 @@
-import { BLOCKS, Document } from "@contentful/rich-text-types";
+import { PostType } from "@/Types/PostType";
+import { createMockPost } from "@/lib/testUtils/testUtils";
 import { render, screen } from "@testing-library/react";
+import { Entry } from "contentful";
 import PostHeader from "./PostHeader";
 
-const content: Document = {
-	nodeType: BLOCKS.DOCUMENT,
-	content: [
-		{
-			nodeType: BLOCKS.PARAGRAPH,
-			content: [
-				{
-					nodeType: "text",
-					value: "Sample Content",
-					marks: [],
-					data: {},
-				},
-			],
-			data: {},
-		},
-	],
-	data: {},
-};
-
-const mockPost = {
-	sys: {
-		id: "1",
+const mockPost: Entry<PostType, undefined, string> = createMockPost({
+	title: "Sample Post",
+	slug: "sample-post",
+	date: "2013-06-01T00:00:00Z",
+	thumbnail: {
+		title: "Sample Image",
+		url: "//path/to/sample-image.jpg",
+		fileName: "sample-image.jpg",
 	},
-	fields: {
-		title: "Sample Post",
-		slug: "sample-post",
-		date: "2013-06-01",
-		thumbnail: {
-			sys: {
-				id: "1",
-			},
-			fields: {
-				title: "Sample Image",
-				file: {
-					url: "//path/to/sample-image.jpg",
-					details: {
-						image: {
-							width: 100,
-							height: 100,
-						},
-					},
-				},
-			},
-		},
-		featuredImage: {
-			sys: {
-				id: "2",
-			},
-			fields: {
-				title: "Featured Image",
-				file: {
-					url: "//path/to/featured-image.jpg",
-					details: {
-						image: {
-							width: 200,
-							height: 200,
-						},
-					},
-				},
-			},
-		},
-		content,
+	featuredImage: {
+		title: "Featured Image",
+		url: "//path/to/featured-image.jpg",
+		fileName: "featured-image.jpg",
 	},
-} as any;
+});
 
 describe("PostHeader Component", () => {
 	test("renders correctly with given post data", () => {
