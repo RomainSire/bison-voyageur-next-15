@@ -1,10 +1,12 @@
 "use client";
+import { TagType } from "@/Types/TagType";
+import { Entry } from "contentful";
 import { motion } from "motion/react";
 import Link from "next/link";
 import style from "./Tag.module.css";
 
 type TagProps = {
-	tag: string;
+	tag: Entry<TagType, undefined, string>;
 	motionInitialDelay?: number;
 };
 
@@ -15,7 +17,7 @@ export default function Tag({ tag, motionInitialDelay = 0 }: TagProps) {
 	const entryTransition = { delay: motionInitialDelay };
 	return (
 		<MotionLink
-			href={`/tag/${encodeURIComponent(tag)}`}
+			href={`/tag/${tag.fields.slug}`}
 			className={style.tag}
 			whileHover={{ scale: 1.1, y: -2, transition: hoverTransition }}
 			whileTap={{ scale: 1.05, transition: hoverTransition }}
@@ -27,7 +29,7 @@ export default function Tag({ tag, motionInitialDelay = 0 }: TagProps) {
 				transition: entryTransition,
 			}}
 		>
-			{tag}
+			{tag.fields.name}
 		</MotionLink>
 	);
 }

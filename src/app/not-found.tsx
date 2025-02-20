@@ -27,7 +27,7 @@ export default function NotFound() {
 					priority={true}
 				/>
 				<div>
-					<h1>La page que vous cherchez n'existe pas !</h1>
+					<h1>La page que vous cherchez n&apos;existe pas !</h1>
 					<MotionLink
 						href="/menu"
 						className={style.link}

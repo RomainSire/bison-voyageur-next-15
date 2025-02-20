@@ -1,15 +1,15 @@
 "use client";
-import directus from "@/lib/directusSDK/directus";
-import { PostSchemaLight } from "@/Schemas/PostSchema";
+import FormatedDate from "@/components/FormatedDate/FormatedDate";
+import { PostTypeLight } from "@/Types/PostType";
+import { Asset, AssetDetails, Entry } from "contentful";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
-import FormatedDate from "../../FormatedDate/FormatedDate";
 import style from "./PostPreview.module.css";
 
 type PostPreviewProps = {
-	post: PostSchemaLight;
+	post: Entry<PostTypeLight, undefined, string>;
 	className?: string;
 	motionInitialX?: number;
 	motionInitialDelay?: number;
@@ -26,6 +26,9 @@ export default function PostPreview({
 	children,
 }: PostPreviewProps) {
 	const [angle, setAngle] = useState(0);
+	const thumbnail = post.fields.thumbnail as Asset;
+	const thumbnailTitle = thumbnail.fields.title as string;
+	const thumbnailDetails = thumbnail.fields.file?.details as AssetDetails;
 
 	useEffect(() => {
 		// random angle between -3 and 3
@@ -34,7 +37,7 @@ export default function PostPreview({
 
 	return (
 		<MotionLink
-			href={`/post/${post.slug}`}
+			href={`/post/${post.fields.slug}`}
 			className={`${style.link} ${className ?? ""}`}
 			whileHover={{ scale: 1.03, rotate: 0 }}
 			whileTap={{ scale: 0.95 }}
@@ -48,14 +51,14 @@ export default function PostPreview({
 		>
 			<article>
 				<Image
-					src={`${directus.url}assets/${post.mainPicture.filename_disk}`}
-					alt={post.mainPictureAlt}
-					width={post.mainPicture.width ?? undefined}
-					height={post.mainPicture.height ?? undefined}
+					src={`https:${thumbnail.fields.file?.url}`}
+					alt={thumbnailTitle ?? ""}
+					width={thumbnailDetails.image?.width ?? 300}
+					height={thumbnailDetails.image?.height ?? 300}
 					className={style.cardImage}
 				/>
-				<h2 className={style.cardTitle}>{post.title}</h2>
-				<FormatedDate date={post.date} className={style.cardDate} />
+				<h2 className={style.cardTitle}>{post.fields.title}</h2>
+				<FormatedDate date={post.fields.date} className={style.cardDate} />
 				{children}
 			</article>
 		</MotionLink>

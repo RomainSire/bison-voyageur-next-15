@@ -7,8 +7,3 @@
  * Revalidate time in seconds for static pages generation
  */
 export const REVALIDATE_TIME = 3600; // 1 hour
-
-/**
- * Directus API URL
- */
-export const API_URL = "https://directus.romainsire.com";

@@ -1,38 +1,32 @@
-import { MainPictureSchema } from "@/Schemas/MainPictureSchema";
-import { PostSchema } from "@/Schemas/PostSchema";
+import { PostType } from "@/Types/PostType";
+import { createMockPost } from "@/lib/testUtils/testUtils";
 import { render, screen } from "@testing-library/react";
+import { Entry } from "contentful";
 import PostHeader from "./PostHeader";
 
-const mainPicture = {
-	filename_disk: "test-image.jpg",
-	width: 800,
-	height: 600,
-	title: "Test Image",
-} as MainPictureSchema;
-
-const mockPost: PostSchema = {
-	id: "1",
-	status: "published",
-	sort: 1,
-	date_created: "2024-12-01",
-	date_updated: "2024-12-01",
-	title: "Test Post",
-	slug: "test-post",
-	date: "2024-12-01",
-	tag: ["test"],
-	mainPicture: mainPicture,
-	mainPictureAlt: "Test Image",
-	summary: "This is a test post",
-	content: "This is the test post content",
-};
+const mockPost: Entry<PostType, undefined, string> = createMockPost({
+	title: "Sample Post",
+	slug: "sample-post",
+	date: "2013-06-01T00:00:00Z",
+	thumbnail: {
+		title: "Sample Image",
+		url: "//path/to/sample-image.jpg",
+		fileName: "sample-image.jpg",
+	},
+	featuredImage: {
+		title: "Featured Image",
+		url: "//path/to/featured-image.jpg",
+		fileName: "featured-image.jpg",
+	},
+});
 
 describe("PostHeader Component", () => {
 	test("renders correctly with given post data", () => {
 		render(<PostHeader post={mockPost} />);
 
-		expect(screen.getByAltText("Test Image")).toBeInTheDocument();
+		expect(screen.getByAltText("Featured Image")).toBeInTheDocument();
 		expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-			"Test Post",
+			"Sample Post",
 		);
 	});
 });

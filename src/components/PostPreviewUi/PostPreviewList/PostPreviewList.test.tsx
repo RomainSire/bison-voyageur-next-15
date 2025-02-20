@@ -1,38 +1,30 @@
-import { PostSchemaLight } from "@/Schemas/PostSchema";
+import { PostTypeLight } from "@/Types/PostType";
+import { createMockPostLight } from "@/lib/testUtils/testUtils";
 import { render, screen } from "@testing-library/react";
+import { Entry } from "contentful";
 import PostPreviewList from "./PostPreviewList";
 
-const mockPosts: PostSchemaLight[] = [
-	{
+const mockPosts: Entry<PostTypeLight, undefined, string>[] = [
+	createMockPostLight({
 		id: "1",
-		slug: "post-1",
-		title: "Post 1",
-		date: "2023-01-01",
-		mainPicture: {
-			filename_disk: "image1.webp",
-			title: "Image 1",
-			height: 100,
-			width: 100,
+		title: "Sample Post 1",
+		slug: "sample-post-1",
+		date: "2024-12-01T00:00:00Z",
+		thumbnail: {
+			title: "Sample Image 1",
+			url: "//path/to/sample-image-1.jpg",
 		},
-		tag: ["tag1"],
-		summary: "Summary 1",
-		mainPictureAlt: "Image 1",
-	},
-	{
+	}),
+	createMockPostLight({
 		id: "2",
-		slug: "post-2",
-		title: "Post 2",
-		date: "2023-01-02",
-		mainPicture: {
-			filename_disk: "image2.webp",
-			title: "Image 2",
-			height: 100,
-			width: 100,
+		title: "Sample Post 2",
+		slug: "sample-post-2",
+		date: "2024-12-02T00:00:00Z",
+		thumbnail: {
+			title: "Sample Image 2",
+			url: "//path/to/sample-image-2.jpg",
 		},
-		tag: ["tag1"],
-		summary: "Summary 1",
-		mainPictureAlt: "Image 2",
-	},
+	}),
 ];
 
 describe("PostPreviewList", () => {
@@ -40,7 +32,7 @@ describe("PostPreviewList", () => {
 		render(<PostPreviewList posts={mockPosts} />);
 
 		mockPosts.forEach((post) => {
-			expect(screen.getByText(post.title)).toBeInTheDocument();
+			expect(screen.getByText(post.fields.title)).toBeInTheDocument();
 		});
 	});
 

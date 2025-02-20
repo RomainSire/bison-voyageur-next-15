@@ -1,58 +1,51 @@
-import { PostSchema, PostSchemaLight } from "@/Schemas/PostSchema";
+import { PostType, PostTypeLight } from "@/Types/PostType";
+import { createMockPost, createMockPostLight } from "@/lib/testUtils/testUtils";
 import { render, screen } from "@testing-library/react";
+import { Entry } from "contentful";
 import PostFooter from "./PostFooter";
 
-const mockAllPosts: PostSchemaLight[] = [
-	{
+const mockAllPosts: Entry<PostTypeLight, undefined, string>[] = [
+	createMockPostLight({
 		id: "1",
 		title: "Post 1",
-		slug: "current-post",
-		date: "2024-01-01",
-		tag: ["tag1"],
-		mainPicture: {
-			filename_disk: "current.jpg",
-			title: "Current Image",
-			height: 100,
-			width: 100,
+		slug: "post-1",
+		date: "2024-12-01T00:00:00Z",
+		thumbnail: {
+			title: "Image 1",
+			url: "//path/to/image.jpg",
+			fileName: "image.jpg",
 		},
-		mainPictureAlt: "Current Image Alt",
-		summary: "Summary of the current post",
-	},
-	{
+	}),
+	createMockPostLight({
 		id: "2",
-		slug: "previous-post",
 		title: "Post 2",
-		date: "2024-01-02",
-		tag: ["tag1"],
-		summary: "Summary of the previous post",
-		mainPictureAlt: "Previous Image Alt",
-		mainPicture: {
-			filename_disk: "previous.jpg",
-			title: "Previous Image",
-			height: 100,
-			width: 100,
+		slug: "post-2",
+		date: "2024-12-02T00:00:00Z",
+		thumbnail: {
+			title: "Image 2",
+			url: "//path/to/image.jpg",
+			fileName: "image.jpg",
 		},
-	},
-	{
+	}),
+	createMockPostLight({
 		id: "3",
-		slug: "next-post",
 		title: "Post 3",
-		date: "2024-01-03",
-		tag: ["tag1"],
-		summary: "Summary of the next post",
-		mainPictureAlt: "Next Image Alt",
-		mainPicture: {
-			filename_disk: "next.jpg",
-			title: "Next Image",
-			height: 100,
-			width: 100,
+		slug: "post-3",
+		date: "2024-12-03T00:00:00Z",
+		thumbnail: {
+			title: "Image 3",
+			url: "//path/to/image.jpg",
+			fileName: "image.jpg",
 		},
-	},
+	}),
 ];
 
 describe("PostFooter", () => {
 	it("should render correctly with previous and next posts", () => {
-		const mockCurrentPost = mockAllPosts[1] as PostSchema;
+		// Post 2 is the current post
+		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
+			id: "2",
+		});
 		render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,
 		);
@@ -64,7 +57,10 @@ describe("PostFooter", () => {
 	});
 
 	it("should render correctly with only previous post", () => {
-		const mockCurrentPost = mockAllPosts[2] as PostSchema;
+		// Post 3 is the current post
+		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
+			id: "3",
+		});
 
 		render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,
@@ -75,7 +71,10 @@ describe("PostFooter", () => {
 	});
 
 	it("should render correctly with only next post", () => {
-		const mockCurrentPost = mockAllPosts[0] as PostSchema;
+		// Post 1 is the current post
+		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
+			id: "1",
+		});
 
 		render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,
@@ -86,44 +85,15 @@ describe("PostFooter", () => {
 	});
 
 	it("should render null if current post is not found in all posts", () => {
-		const mockCurrentPost = {
-			id: "14",
-			title: "Post inexistant",
-			slug: "current-post",
-			date: "2024-01-01",
-			tag: ["tag1"],
-			mainPicture: {
-				filename_disk: "current.jpg",
-				title: "Current Image",
-				height: 100,
-				width: 100,
-			},
-			mainPictureAlt: "Current Image Alt",
-			summary: "Summary of the current post",
-		} as PostSchema;
+		// Current post is not in the list of all posts
+		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
+			id: "4",
+		});
 
 		const { container } = render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,
 		);
 
 		expect(container.firstChild).toBeNull();
-	});
-
-	it("should order posts correctly", () => {
-		const unorderedPosts: PostSchemaLight[] = [
-			mockAllPosts[2], // Next Post
-			mockAllPosts[1], // Current Post
-			mockAllPosts[0], // Previous Post
-		];
-
-		const mockCurrentPost = mockAllPosts[1] as PostSchema;
-
-		render(
-			<PostFooter currentPost={mockCurrentPost} allPosts={unorderedPosts} />,
-		);
-
-		const indicators = screen.getAllByText(/Post 1|Post 3/);
-		expect(indicators[0]).toHaveTextContent("Post 1");
-		expect(indicators[1]).toHaveTextContent("Post 3");
 	});
 });

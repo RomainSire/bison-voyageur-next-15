@@ -1,10 +1,11 @@
 import PostPreview from "@/components/PostPreviewUi/PostPreview/PostPreview";
-import type { PostSchema, PostSchemaLight } from "@/Schemas/PostSchema";
+import { PostType, PostTypeLight } from "@/Types/PostType";
+import { Entry } from "contentful";
 import style from "./PostFooter.module.css";
 
 type PrevNextPostProps = Readonly<{
-	currentPost: PostSchema;
-	allPosts: PostSchemaLight[];
+	currentPost: Entry<PostType, undefined, string>;
+	allPosts: Entry<PostTypeLight, undefined, string>[];
 	className?: string;
 }>;
 
@@ -13,11 +14,8 @@ export default function PostFooter({
 	allPosts,
 	className,
 }: PrevNextPostProps) {
-	const sortedPost = allPosts.toSorted((postA, postB) => {
-		return new Date(postA.date).getTime() - new Date(postB.date).getTime();
-	});
-	const currentPostIndex = sortedPost.findIndex((post) => {
-		return post.id === currentPost.id;
+	const currentPostIndex = allPosts.findIndex((post) => {
+		return post.sys.id === currentPost.sys.id;
 	});
 
 	if (currentPostIndex === -1) {
@@ -25,7 +23,7 @@ export default function PostFooter({
 	}
 
 	const nextPostIndex =
-		currentPostIndex === sortedPost.length - 1 ? null : currentPostIndex + 1;
+		currentPostIndex === allPosts.length - 1 ? null : currentPostIndex + 1;
 	const previousPostIndex =
 		currentPostIndex === 0 ? null : currentPostIndex - 1;
 
@@ -34,7 +32,7 @@ export default function PostFooter({
 			{previousPostIndex !== null && (
 				<PostPreview
 					className={`${style.postPreview} ${style.previous}`}
-					post={sortedPost[previousPostIndex]}
+					post={allPosts[previousPostIndex]}
 					motionInitialX={-100}
 					motionInitialDelay={0.3}
 				>
@@ -44,7 +42,7 @@ export default function PostFooter({
 			{nextPostIndex !== null && (
 				<PostPreview
 					className={`${style.postPreview}  ${style.next}`}
-					post={sortedPost[nextPostIndex]}
+					post={allPosts[nextPostIndex]}
 					motionInitialX={100}
 					motionInitialDelay={0.4}
 				>

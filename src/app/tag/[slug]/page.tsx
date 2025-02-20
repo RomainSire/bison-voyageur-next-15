@@ -1,13 +1,15 @@
-import { getAllTags, getPostsByTag } from "@/actions/postsActions";
 import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
 import { REVALIDATE_TIME } from "@/publicConfig";
+import { getPostsByTag } from "@/services/postService";
+import { getAllTags, getTagBySlug } from "@/services/tagService";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import style from "./page.module.css";
 
 type TagPageProps = {
 	params: Promise<{
-		tag: string;
+		slug: string;
 	}>;
 };
 
@@ -21,16 +23,31 @@ export const revalidate = REVALIDATE_TIME;
  */
 export async function generateStaticParams() {
 	const tags = await getAllTags();
-	return tags.map((tag) => ({ tag }));
+	return tags.map((tag) => ({ slug: tag.fields.slug }));
+}
+
+/**
+ * Generate the metadata for the tag pages
+ */
+export async function generateMetadata({
+	params,
+}: TagPageProps): Promise<Metadata> {
+	const tagSlug = (await params).slug;
+	const tag = await getTagBySlug(tagSlug);
+
+	return {
+		title: `Tag: ${tag.fields.name} | Bison Voyageur`,
+		description: `Tous les posts tagués avec "${tag.fields.name}".`,
+	};
 }
 
 /**
  * Tag Page component
  */
 export default async function TagPage({ params }: TagPageProps) {
-	const tag = (await params).tag;
-	const decodedTag = decodeURIComponent(tag);
-	const taggedPosts = await getPostsByTag(decodedTag);
+	const tagSlug = (await params).slug;
+	const tag = await getTagBySlug(tagSlug);
+	const taggedPosts = await getPostsByTag(tag.sys.id);
 
 	if (taggedPosts.length === 0) {
 		notFound();
@@ -39,7 +56,7 @@ export default async function TagPage({ params }: TagPageProps) {
 	return (
 		<div className={style.wrapper}>
 			<AnimatedTitle className={style.mainTitle} type="h1">
-				Tag: {decodedTag}
+				Tag: {tag.fields.name}
 			</AnimatedTitle>
 			<PostPreviewList posts={taggedPosts} motionInitialDelay={0.1} />
 		</div>
