@@ -46,6 +46,7 @@ export async function generateMetadata({
 		openGraph: {
 			images: [`https:${thumbnail.fields.file?.url}`],
 		},
+		metadataBase: new URL("https://bisonvoyageur.com"),
 	};
 }
 

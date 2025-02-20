@@ -37,6 +37,7 @@ export async function generateMetadata({
 	return {
 		title: `Tag: ${tag.fields.name} | Bison Voyageur`,
 		description: `Tous les posts tagués avec "${tag.fields.name}".`,
+		metadataBase: new URL("https://bisonvoyageur.com"),
 	};
 }
 

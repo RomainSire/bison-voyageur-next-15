@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 	title: "Menu | Bison Voyageur",
 	description:
 		"Ici sont répertoriés tous les articles et tags du blog Bison Voyageur.",
+	metadataBase: new URL("https://bisonvoyageur.com"),
 };
 
 /**
