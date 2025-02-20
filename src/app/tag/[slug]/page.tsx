@@ -1,6 +1,5 @@
 import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
-import { REVALIDATE_TIME } from "@/publicConfig";
 import { getPostsByTag } from "@/services/postService";
 import { getAllTags, getTagBySlug } from "@/services/tagService";
 import { Metadata } from "next";
@@ -16,7 +15,7 @@ type TagPageProps = {
 /**
  * Revalidate time in seconds
  */
-export const revalidate = REVALIDATE_TIME;
+export const revalidate = 3600;
 
 /**
  * Generate the static params for the tag pages, used for the static generation

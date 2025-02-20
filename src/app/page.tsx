@@ -1,14 +1,13 @@
 import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import MainHero from "@/components/MainHero/MainHero";
 import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
-import { REVALIDATE_TIME } from "@/publicConfig";
 import { getLastPosts } from "@/services/postService";
 import style from "./page.module.css";
 
 /**
  * Revalidate time in seconds
  */
-export const revalidate = REVALIDATE_TIME;
+export const revalidate = 3600;
 /**
  * Home Page component
  */
