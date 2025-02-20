@@ -1,8 +1,9 @@
+import { BLOCKS, Document } from "@contentful/rich-text-types";
 import { getAllImagesFromRichText } from "./postHelper";
 
 describe("getAllImagesFromRichText", () => {
 	it("should return an array of assets from a rich text document", () => {
-		const mockAsset: any = {
+		const mockAsset = {
 			sys: {
 				id: "asset-id",
 				type: "Asset",
@@ -28,12 +29,12 @@ describe("getAllImagesFromRichText", () => {
 			},
 		};
 
-		const mockDocument: any = {
-			nodeType: "document",
+		const mockDocument: Document = {
+			nodeType: BLOCKS.DOCUMENT,
 			data: {},
 			content: [
 				{
-					nodeType: "embedded-asset-block",
+					nodeType: BLOCKS.EMBEDDED_ASSET,
 					content: [],
 					data: {
 						target: mockAsset,
@@ -47,12 +48,12 @@ describe("getAllImagesFromRichText", () => {
 	});
 
 	it("should return an empty array if there are no embedded assets", () => {
-		const mockDocument: any = {
-			nodeType: "document",
+		const mockDocument: Document = {
+			nodeType: BLOCKS.DOCUMENT,
 			data: {},
 			content: [
 				{
-					nodeType: "paragraph",
+					nodeType: BLOCKS.PARAGRAPH,
 					content: [
 						{
 							nodeType: "text",

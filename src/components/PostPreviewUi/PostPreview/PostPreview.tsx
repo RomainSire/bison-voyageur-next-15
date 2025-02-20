@@ -53,8 +53,8 @@ export default function PostPreview({
 				<Image
 					src={`https:${thumbnail.fields.file?.url}`}
 					alt={thumbnailTitle ?? ""}
-					width={thumbnailDetails.image?.width ?? undefined}
-					height={thumbnailDetails.image?.height ?? undefined}
+					width={thumbnailDetails.image?.width ?? 300}
+					height={thumbnailDetails.image?.height ?? 300}
 					className={style.cardImage}
 				/>
 				<h2 className={style.cardTitle}>{post.fields.title}</h2>
