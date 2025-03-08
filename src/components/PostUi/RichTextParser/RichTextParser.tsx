@@ -22,6 +22,13 @@ export default function RichTextParser({
 					<RichTextImage image={node.data.target} onImageClick={onImageClick} />
 				);
 			},
+			[BLOCKS.UL_LIST]: (node, children) => {
+				return (
+					<ul style={{ listStyle: "disc", paddingLeft: "var(--lg)" }}>
+						{children}
+					</ul>
+				);
+			},
 		},
 	};
 
