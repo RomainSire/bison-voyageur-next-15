@@ -7,7 +7,9 @@
 	border: 5px solid var(--color-neutral-100);
 	box-shadow: 0 0 0.5rem 0 var(--color-neutral-900);
 	border-radius: 2px;
+	background-color: var(--color-neutral-200);
 }
+
 .title {
 	position: absolute;
 	left: 1.5em;
