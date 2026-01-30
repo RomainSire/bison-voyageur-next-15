@@ -32,6 +32,7 @@ export default function PostPreview({
 
 	useEffect(() => {
 		// random angle between -3 and 3
+		// eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: random value must be set client-side to avoid hydration mismatch
 		setAngle(Math.random() * 10 - 3);
 	}, []);
 

@@ -2,7 +2,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
 
 interface LayoutTransitionProps {
 	children: React.ReactNode;
@@ -43,18 +43,19 @@ export function LayoutTransition({
 	);
 }
 
+/* eslint-disable react-hooks/refs -- classic usePreviousValue pattern requires ref access during render */
 function usePreviousValue<T>(value: T): T | undefined {
-	const prevValue = useRef<T>(undefined);
+	const prevValue = useRef<T | undefined>(undefined);
+	const currentValue = useRef<T>(value);
 
-	useEffect(() => {
-		prevValue.current = value;
-		return () => {
-			prevValue.current = undefined;
-		};
-	});
+	if (currentValue.current !== value) {
+		prevValue.current = currentValue.current;
+		currentValue.current = value;
+	}
 
 	return prevValue.current;
 }
+/* eslint-enable react-hooks/refs */
 
 function FrozenRouter(props: { children: React.ReactNode }) {
 	const context = useContext(LayoutRouterContext);
