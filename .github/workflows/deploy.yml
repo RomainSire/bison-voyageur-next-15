@@ -59,6 +59,7 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
+    environment: prod
 
     steps:
       - name: Deploy to VPS
