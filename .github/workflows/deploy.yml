@@ -73,7 +73,7 @@ jobs:
             cd /opt/docker/bisonvoyageur
 
             # Login to GHCR
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
             # Pull nouvelle image
             docker compose pull
