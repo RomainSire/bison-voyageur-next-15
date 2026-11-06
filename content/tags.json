@@ -1,0 +1,11 @@
+[
+	{ "slug": "tour-du-monde", "name": "Tour du monde" },
+	{ "slug": "preparatifs", "name": "Préparatifs" },
+	{ "slug": "galeres", "name": "Galères" },
+	{ "slug": "europe", "name": "Europe" },
+	{ "slug": "asie", "name": "Asie" },
+	{ "slug": "oceanie", "name": "Océanie" },
+	{ "slug": "pacifique", "name": "Pacifique" },
+	{ "slug": "grosse-claque", "name": "Grosse claque" },
+	{ "slug": "coup-de-coeur", "name": "Coup de cœur" }
+]
