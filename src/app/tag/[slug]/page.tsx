@@ -1,7 +1,6 @@
 import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
-import { getPostsByTag } from "@/services/postService";
-import { getAllTags, getTagBySlug } from "@/services/tagService";
+import { getAllTags, getPostsByTag, getTagBySlug } from "@/content";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import style from "./page.module.css";
@@ -13,16 +12,15 @@ type TagPageProps = {
 };
 
 /**
- * Revalidate time in seconds
+ * Only the tags of content/ exist: every page is generated at build time
  */
-export const revalidate = 3600;
+export const dynamicParams = false;
 
 /**
  * Generate the static params for the tag pages, used for the static generation
  */
-export async function generateStaticParams() {
-	const tags = await getAllTags();
-	return tags.map((tag) => ({ slug: tag.fields.slug }));
+export function generateStaticParams() {
+	return getAllTags().map((tag) => ({ slug: tag.slug }));
 }
 
 /**
@@ -31,12 +29,14 @@ export async function generateStaticParams() {
 export async function generateMetadata({
 	params,
 }: TagPageProps): Promise<Metadata> {
-	const tagSlug = (await params).slug;
-	const tag = await getTagBySlug(tagSlug);
+	const tag = getTagBySlug((await params).slug);
+	if (!tag) {
+		notFound();
+	}
 
 	return {
-		title: `Tag: ${tag.fields.name} | Bison Voyageur`,
-		description: `Tous les posts tagués avec "${tag.fields.name}".`,
+		title: `Tag: ${tag.name} | Bison Voyageur`,
+		description: `Tous les posts tagués avec "${tag.name}".`,
 		metadataBase: new URL("https://bisonvoyageur.com"),
 	};
 }
@@ -45,18 +45,17 @@ export async function generateMetadata({
  * Tag Page component
  */
 export default async function TagPage({ params }: TagPageProps) {
-	const tagSlug = (await params).slug;
-	const tag = await getTagBySlug(tagSlug);
-	const taggedPosts = await getPostsByTag(tag.sys.id);
-
-	if (taggedPosts.length === 0) {
+	const tag = getTagBySlug((await params).slug);
+	if (!tag) {
 		notFound();
 	}
+
+	const taggedPosts = getPostsByTag(tag.slug);
 
 	return (
 		<div className={style.wrapper}>
 			<AnimatedTitle className={style.mainTitle} type="h1">
-				Tag: {tag.fields.name}
+				Tag: {tag.name}
 			</AnimatedTitle>
 			<PostPreviewList posts={taggedPosts} motionInitialDelay={0.1} />
 		</div>

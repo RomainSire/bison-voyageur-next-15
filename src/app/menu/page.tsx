@@ -2,15 +2,9 @@ import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPrev
 
 import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import TagList from "@/components/TagsUi/TagList/TagList";
-import { getAllPosts } from "@/services/postService";
-import { getAllTags } from "@/services/tagService";
+import { getAllPosts, getAllTags } from "@/content";
 import { Metadata } from "next";
 import style from "./page.module.css";
-
-/**
- * Revalidate time in seconds
- */
-export const revalidate = 3600;
 
 export const metadata: Metadata = {
 	title: "Menu | Bison Voyageur",
@@ -22,9 +16,9 @@ export const metadata: Metadata = {
 /**
  * Main Menu Page component
  */
-export default async function MainMenuPage() {
-	const allPosts = await getAllPosts();
-	const allTags = await getAllTags();
+export default function MainMenuPage() {
+	const allPosts = getAllPosts();
+	const allTags = getAllTags();
 
 	return (
 		<div className={style.wrapper}>

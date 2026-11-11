@@ -1,16 +1,15 @@
-import { createMockPostLight } from "@/lib/testUtils/testUtils";
+import { createMockPostPreview } from "@/lib/testUtils/testUtils";
 import { render, screen } from "@testing-library/react";
 import PostPreview from "./PostPreview";
 
 // Mock post object
-const mockedPost = createMockPostLight({
+const mockedPost = createMockPostPreview({
 	title: "Sample Post",
 	slug: "sample-post",
-	date: "2024-12-01T00:00:00Z",
-	thumbnail: {
-		title: "Sample Image",
-		url: "//path/to/sample-image.jpg",
-		fileName: "sample-image.jpg",
+	date: "2024-12-01",
+	mainPicture: {
+		caption: "Sample Image",
+		src: "/pictures/01-sample-post/sample-image.jpg",
 	},
 });
 
@@ -31,5 +30,13 @@ describe("PostPreview", () => {
 		render(<PostPreview post={mockedPost} />);
 		const image = screen.getByAltText("Sample Image");
 		expect(image).toBeInTheDocument();
+	});
+
+	it("should link to the post page", () => {
+		render(<PostPreview post={mockedPost} />);
+		expect(screen.getByRole("link")).toHaveAttribute(
+			"href",
+			"/post/sample-post",
+		);
 	});
 });

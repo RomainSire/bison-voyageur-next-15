@@ -1,25 +1,11 @@
 import { createMockTag } from "@/lib/testUtils/testUtils";
-import { TagType } from "@/Types/TagType";
 import { render, screen } from "@testing-library/react";
-import { Entry } from "contentful";
 import TagList from "./TagList";
 
-const mockedTags: Entry<TagType, undefined, string>[] = [
-	createMockTag({
-		id: "1",
-		name: "React",
-		slug: "react",
-	}),
-	createMockTag({
-		id: "2",
-		name: "Next.js",
-		slug: "next-js",
-	}),
-	createMockTag({
-		id: "3",
-		name: "JavaScript",
-		slug: "javascript",
-	}),
+const mockedTags = [
+	createMockTag({ name: "React", slug: "react" }),
+	createMockTag({ name: "Next.js", slug: "next-js" }),
+	createMockTag({ name: "JavaScript", slug: "javascript" }),
 ];
 
 describe("TagList Component", () => {
@@ -27,7 +13,7 @@ describe("TagList Component", () => {
 		render(<TagList tags={mockedTags} />);
 
 		mockedTags.forEach((tag) => {
-			expect(screen.getByText(tag.fields.name)).toBeInTheDocument();
+			expect(screen.getByText(tag.name)).toBeInTheDocument();
 		});
 	});
 
@@ -38,7 +24,7 @@ describe("TagList Component", () => {
 		);
 
 		mockedTags.forEach((tag) => {
-			expect(screen.getByText(tag.fields.name)).toBeInTheDocument();
+			expect(screen.getByText(tag.name)).toBeInTheDocument();
 		});
 	});
 });

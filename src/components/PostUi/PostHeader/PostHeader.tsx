@@ -1,12 +1,11 @@
 "use client";
-import { PostType } from "@/Types/PostType";
-import { Asset, AssetDetails, Entry } from "contentful";
+import type { PostPreview } from "@/content";
 import { motion } from "motion/react";
 import Image from "next/image";
 import style from "./PostHeader.module.css";
 
 type PostHeaderProps = {
-	post: Entry<PostType, undefined, string>;
+	post: PostPreview;
 	className?: string;
 	motionInitialDelay?: number;
 };
@@ -18,18 +17,13 @@ export default function PostHeader({
 	className,
 	motionInitialDelay = 0,
 }: PostHeaderProps) {
-	const featuredImage = post.fields.featuredImage as Asset;
-	const featuredImageTitle = featuredImage.fields.title as string;
-	const featuredImageDetails = featuredImage.fields.file
-		?.details as AssetDetails;
-
 	return (
 		<header className={`${style.wrapper} ${className ?? ""}`}>
 			<MotionImage
-				src={`https:${featuredImage.fields.file?.url}`}
-				alt={featuredImageTitle ?? ""}
-				width={featuredImageDetails.image?.width ?? undefined}
-				height={featuredImageDetails.image?.height ?? undefined}
+				src={post.mainPicture.src}
+				alt={post.mainPicture.caption}
+				width={post.mainPicture.width}
+				height={post.mainPicture.height}
 				className={style.image}
 				initial={{ x: -15, opacity: 0 }}
 				animate={{
@@ -53,7 +47,7 @@ export default function PostHeader({
 					},
 				}}
 			>
-				{post.fields.title}
+				{post.title}
 			</motion.h1>
 		</header>
 	);

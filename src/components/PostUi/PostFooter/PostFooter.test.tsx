@@ -1,51 +1,32 @@
-import { PostType, PostTypeLight } from "@/Types/PostType";
-import { createMockPost, createMockPostLight } from "@/lib/testUtils/testUtils";
+import {
+	createMockPost,
+	createMockPostPreview,
+} from "@/lib/testUtils/testUtils";
 import { render, screen } from "@testing-library/react";
-import { Entry } from "contentful";
 import PostFooter from "./PostFooter";
 
-const mockAllPosts: Entry<PostTypeLight, undefined, string>[] = [
-	createMockPostLight({
-		id: "1",
+const mockAllPosts = [
+	createMockPostPreview({
 		title: "Post 1",
 		slug: "post-1",
-		date: "2024-12-01T00:00:00Z",
-		thumbnail: {
-			title: "Image 1",
-			url: "//path/to/image.jpg",
-			fileName: "image.jpg",
-		},
+		date: "2024-12-01",
 	}),
-	createMockPostLight({
-		id: "2",
+	createMockPostPreview({
 		title: "Post 2",
 		slug: "post-2",
-		date: "2024-12-02T00:00:00Z",
-		thumbnail: {
-			title: "Image 2",
-			url: "//path/to/image.jpg",
-			fileName: "image.jpg",
-		},
+		date: "2024-12-02",
 	}),
-	createMockPostLight({
-		id: "3",
+	createMockPostPreview({
 		title: "Post 3",
 		slug: "post-3",
-		date: "2024-12-03T00:00:00Z",
-		thumbnail: {
-			title: "Image 3",
-			url: "//path/to/image.jpg",
-			fileName: "image.jpg",
-		},
+		date: "2024-12-03",
 	}),
 ];
 
 describe("PostFooter", () => {
 	it("should render correctly with previous and next posts", () => {
 		// Post 2 is the current post
-		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
-			id: "2",
-		});
+		const mockCurrentPost = createMockPost({ slug: "post-2" });
 		render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,
 		);
@@ -58,9 +39,7 @@ describe("PostFooter", () => {
 
 	it("should render correctly with only previous post", () => {
 		// Post 3 is the current post
-		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
-			id: "3",
-		});
+		const mockCurrentPost = createMockPost({ slug: "post-3" });
 
 		render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,
@@ -72,9 +51,7 @@ describe("PostFooter", () => {
 
 	it("should render correctly with only next post", () => {
 		// Post 1 is the current post
-		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
-			id: "1",
-		});
+		const mockCurrentPost = createMockPost({ slug: "post-1" });
 
 		render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,
@@ -86,9 +63,7 @@ describe("PostFooter", () => {
 
 	it("should render null if current post is not found in all posts", () => {
 		// Current post is not in the list of all posts
-		const mockCurrentPost: Entry<PostType, undefined, string> = createMockPost({
-			id: "4",
-		});
+		const mockCurrentPost = createMockPost({ slug: "post-4" });
 
 		const { container } = render(
 			<PostFooter currentPost={mockCurrentPost} allPosts={mockAllPosts} />,

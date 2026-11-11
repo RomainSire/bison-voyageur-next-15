@@ -1,29 +1,19 @@
-import { PostTypeLight } from "@/Types/PostType";
-import { createMockPostLight } from "@/lib/testUtils/testUtils";
+import { createMockPostPreview } from "@/lib/testUtils/testUtils";
 import { render, screen } from "@testing-library/react";
-import { Entry } from "contentful";
 import PostPreviewList from "./PostPreviewList";
 
-const mockPosts: Entry<PostTypeLight, undefined, string>[] = [
-	createMockPostLight({
-		id: "1",
+const mockPosts = [
+	createMockPostPreview({
 		title: "Sample Post 1",
 		slug: "sample-post-1",
-		date: "2024-12-01T00:00:00Z",
-		thumbnail: {
-			title: "Sample Image 1",
-			url: "//path/to/sample-image-1.jpg",
-		},
+		date: "2024-12-01",
+		mainPicture: { caption: "Sample Image 1" },
 	}),
-	createMockPostLight({
-		id: "2",
+	createMockPostPreview({
 		title: "Sample Post 2",
 		slug: "sample-post-2",
-		date: "2024-12-02T00:00:00Z",
-		thumbnail: {
-			title: "Sample Image 2",
-			url: "//path/to/sample-image-2.jpg",
-		},
+		date: "2024-12-02",
+		mainPicture: { caption: "Sample Image 2" },
 	}),
 ];
 
@@ -32,7 +22,7 @@ describe("PostPreviewList", () => {
 		render(<PostPreviewList posts={mockPosts} />);
 
 		mockPosts.forEach((post) => {
-			expect(screen.getByText(post.fields.title)).toBeInTheDocument();
+			expect(screen.getByText(post.title)).toBeInTheDocument();
 		});
 	});
 

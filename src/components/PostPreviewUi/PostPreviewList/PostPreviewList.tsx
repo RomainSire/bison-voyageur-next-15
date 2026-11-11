@@ -1,11 +1,10 @@
 "use client";
-import { PostTypeLight } from "@/Types/PostType";
-import { Entry } from "contentful";
+import type { PostPreview as PostPreviewType } from "@/content";
 import PostPreview from "../PostPreview/PostPreview";
 import style from "./PostPreviewList.module.css";
 
 type PostPreviewListProps = {
-	posts: Entry<PostTypeLight, undefined, string>[];
+	posts: PostPreviewType[];
 	motionInitialDelay?: number;
 };
 
@@ -20,7 +19,7 @@ export default function PostPreviewList({
 					const motionInitialX = index % 2 === 0 ? -100 : 100;
 					const selfDelay = (index + 1) * 0.1 + motionInitialDelay;
 					return (
-						<li className={style.postWrapper} key={post.fields.slug}>
+						<li className={style.postWrapper} key={post.slug}>
 							<PostPreview
 								post={post}
 								className={style.post}

@@ -5,7 +5,6 @@ import Tag from "./Tag";
 
 // Mock post object
 const mockedTag = createMockTag({
-	id: "1",
 	name: "Test Tag",
 	slug: "test-tag",
 });

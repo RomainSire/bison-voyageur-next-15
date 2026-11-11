@@ -1,25 +1,12 @@
-import { createMockAssetLink } from "@/lib/testUtils/testUtils";
+import { createMockPicture } from "@/lib/testUtils/testUtils";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Asset } from "contentful";
 import ImagesGallery from "./ImagesGallery";
 
-const mockImages: Asset<undefined, string>[] = [
-	createMockAssetLink({
-		id: "1",
-		title: "Image 1",
-		url: "//path/to/image-1.jpg",
-	}),
-	createMockAssetLink({
-		id: "2",
-		title: "Image 2",
-		url: "//path/to/image-2.jpg",
-	}),
-	createMockAssetLink({
-		id: "3",
-		title: "Image 3",
-		url: "//path/to/image-3.jpg",
-	}),
+const mockImages = [
+	createMockPicture({ caption: "Image 1", src: "/pictures/path/image-1.jpg" }),
+	createMockPicture({ caption: "Image 2", src: "/pictures/path/image-2.jpg" }),
+	createMockPicture({ caption: "Image 3", src: "/pictures/path/image-3.jpg" }),
 ];
 
 describe("ImagesGallery", () => {

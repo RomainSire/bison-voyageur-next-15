@@ -1,18 +1,14 @@
 import AnimatedTitle from "@/components/AnimatedTitle/AnimatedTitle";
 import MainHero from "@/components/MainHero/MainHero";
 import PostPreviewList from "@/components/PostPreviewUi/PostPreviewList/PostPreviewList";
-import { getLastPosts } from "@/services/postService";
+import { getLastPosts } from "@/content";
 import style from "./page.module.css";
 
 /**
- * Revalidate time in seconds
- */
-export const revalidate = 3600;
-/**
  * Home Page component
  */
-export default async function Home() {
-	const lastPosts = await getLastPosts(4);
+export default function Home() {
+	const lastPosts = getLastPosts(4);
 
 	return (
 		<div className={style.wrapper}>

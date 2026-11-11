@@ -1,13 +1,13 @@
 import { handleHorizontalSwipe } from "@/lib/swipeGestureHelper/swipeGestureHelper";
 import { wrap } from "@/lib/wrap/wrap";
-import { Asset, AssetDetails } from "contentful";
+import type { Picture } from "@/content";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
 import style from "./ImageGallery.module.css";
 
 type ImagesGalleryProps = {
-	allImages: Asset[];
+	allImages: Picture[];
 	startIndex: number;
 };
 
@@ -54,17 +54,8 @@ export default function ImagesGallery({
 
 	// Create some useful variables
 	const currentImage = allImages[imageIndex];
-	const currentImageTitle = currentImage.fields.title as string;
-	const currentImageDetails = currentImage.fields.file?.details as AssetDetails;
-
 	const nextImage = allImages[nextImageIndex];
-	const nextImageTitle = nextImage.fields.title as string;
-	const nextImageDetails = nextImage.fields.file?.details as AssetDetails;
-
 	const previousImage = allImages[previousImageIndex];
-	const previousImageTitle = previousImage.fields.title as string;
-	const previousImageDetails = previousImage.fields.file
-		?.details as AssetDetails;
 
 	return (
 		<>
@@ -72,10 +63,10 @@ export default function ImagesGallery({
 				<MotionImage
 					className={style.image}
 					key={page}
-					src={`https:${currentImage.fields.file?.url}`}
-					alt={currentImageTitle ?? ""}
-					width={currentImageDetails.image?.width ?? undefined}
-					height={currentImageDetails.image?.height ?? undefined}
+					src={currentImage.src}
+					alt={currentImage.caption}
+					width={currentImage.width}
+					height={currentImage.height}
 					loading="eager"
 					custom={direction}
 					variants={variants}
@@ -150,21 +141,21 @@ export default function ImagesGallery({
 			{/* Pre-load next and previous images for smooth transitions */}
 			<Image
 				className="visuallyHidden"
-				src={`https:${nextImage.fields.file?.url}`}
-				alt={nextImageTitle || ""}
-				width={nextImageDetails.image?.width ?? undefined}
-				height={nextImageDetails.image?.height ?? undefined}
+				src={nextImage.src}
+				alt={nextImage.caption}
+				width={nextImage.width}
+				height={nextImage.height}
 				loading="eager"
-				key={`https:${nextImage.fields.file?.url}`}
+				key={nextImage.src}
 			/>
 			<Image
 				className="visuallyHidden"
-				src={`https:${previousImage.fields.file?.url}`}
-				alt={previousImageTitle || ""}
-				width={previousImageDetails.image?.width ?? undefined}
-				height={previousImageDetails.image?.height ?? undefined}
+				src={previousImage.src}
+				alt={previousImage.caption}
+				width={previousImage.width}
+				height={previousImage.height}
 				loading="eager"
-				key={`https:${previousImage.fields.file?.url}`}
+				key={previousImage.src}
 			/>
 		</>
 	);

@@ -1,7 +1,6 @@
 "use client";
 import FormatedDate from "@/components/FormatedDate/FormatedDate";
-import { PostTypeLight } from "@/Types/PostType";
-import { Asset, AssetDetails, Entry } from "contentful";
+import type { PostPreview as PostPreviewType } from "@/content";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +8,7 @@ import { ReactNode, useEffect, useState } from "react";
 import style from "./PostPreview.module.css";
 
 type PostPreviewProps = {
-	post: Entry<PostTypeLight, undefined, string>;
+	post: PostPreviewType;
 	className?: string;
 	motionInitialX?: number;
 	motionInitialDelay?: number;
@@ -26,9 +25,6 @@ export default function PostPreview({
 	children,
 }: PostPreviewProps) {
 	const [angle, setAngle] = useState(0);
-	const thumbnail = post.fields.thumbnail as Asset;
-	const thumbnailTitle = thumbnail.fields.title as string;
-	const thumbnailDetails = thumbnail.fields.file?.details as AssetDetails;
 
 	useEffect(() => {
 		// random angle between -3 and 3
@@ -38,7 +34,7 @@ export default function PostPreview({
 
 	return (
 		<MotionLink
-			href={`/post/${post.fields.slug}`}
+			href={`/post/${post.slug}`}
 			className={`${style.link} ${className ?? ""}`}
 			whileHover={{ scale: 1.03, rotate: 0 }}
 			whileTap={{ scale: 0.95 }}
@@ -52,14 +48,14 @@ export default function PostPreview({
 		>
 			<article>
 				<Image
-					src={`https:${thumbnail.fields.file?.url}`}
-					alt={thumbnailTitle ?? ""}
-					width={thumbnailDetails.image?.width ?? 300}
-					height={thumbnailDetails.image?.height ?? 300}
+					src={post.mainPicture.src}
+					alt={post.mainPicture.caption}
+					width={post.mainPicture.width}
+					height={post.mainPicture.height}
 					className={style.cardImage}
 				/>
-				<h2 className={style.cardTitle}>{post.fields.title}</h2>
-				<FormatedDate date={post.fields.date} className={style.cardDate} />
+				<h2 className={style.cardTitle}>{post.title}</h2>
+				<FormatedDate date={post.date} className={style.cardDate} />
 				{children}
 			</article>
 		</MotionLink>

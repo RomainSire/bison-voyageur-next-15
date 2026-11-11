@@ -1,11 +1,10 @@
 import PostPreview from "@/components/PostPreviewUi/PostPreview/PostPreview";
-import { PostType, PostTypeLight } from "@/Types/PostType";
-import { Entry } from "contentful";
+import type { PostPreview as PostPreviewType } from "@/content";
 import style from "./PostFooter.module.css";
 
 type PrevNextPostProps = Readonly<{
-	currentPost: Entry<PostType, undefined, string>;
-	allPosts: Entry<PostTypeLight, undefined, string>[];
+	currentPost: PostPreviewType;
+	allPosts: PostPreviewType[];
 	className?: string;
 }>;
 
@@ -15,7 +14,7 @@ export default function PostFooter({
 	className,
 }: PrevNextPostProps) {
 	const currentPostIndex = allPosts.findIndex((post) => {
-		return post.sys.id === currentPost.sys.id;
+		return post.slug === currentPost.slug;
 	});
 
 	if (currentPostIndex === -1) {

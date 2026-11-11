@@ -17,7 +17,7 @@ const config: Config = {
 	},
 };
 
-// ESM-only packages (unified / remark ecosystem) must be transformed by Jest.
+// ESM-only packages (unified / remark / react-markdown ecosystem) must be transformed by Jest.
 // next/jest only lets us append ignore patterns, so we replace its node_modules
 // patterns here, in the same pnpm-aware shape.
 const esmPackages = [
@@ -28,7 +28,20 @@ const esmPackages = [
 	"unified",
 	"vfile[^/@]*",
 	"decode-named-character-reference",
-	"character-entities",
+	"character-[^/@]+",
+	"react-markdown",
+	"hast-util-[^/@]+",
+	"estree-util-[^/@]+",
+	"html-url-attributes",
+	"property-information",
+	"space-separated-tokens",
+	"comma-separated-tokens",
+	"stringify-entities",
+	"trim-lines",
+	"ccount",
+	"zwitch",
+	"longest-streak",
+	"escape-string-regexp",
 	"devlop",
 	"bail",
 	"is-plain-obj",

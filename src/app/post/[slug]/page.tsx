@@ -2,9 +2,7 @@ import PostContent from "@/components/PostUi/PostContent/PostContent";
 import PostFooter from "@/components/PostUi/PostFooter/PostFooter";
 import PostHeader from "@/components/PostUi/PostHeader/PostHeader";
 import TagList from "@/components/TagsUi/TagList/TagList";
-import { getAllPosts, getPostBySlug } from "@/services/postService";
-import { TagType } from "@/Types/TagType";
-import { Asset, Entry } from "contentful";
+import { getAllPosts, getPostBySlug } from "@/content";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import style from "./page.module.css";
@@ -16,18 +14,15 @@ type PostPageProps = {
 };
 
 /**
- * Revalidate time in seconds
+ * Only the posts of content/ exist: every page is generated at build time
  */
-export const revalidate = 3600;
+export const dynamicParams = false;
 
 /**
  * Generate the static params for the post pages, used for the static generation
  */
-export async function generateStaticParams() {
-	const posts = await getAllPosts();
-	return posts.map((post) => ({
-		slug: post.fields.slug,
-	}));
+export function generateStaticParams() {
+	return getAllPosts().map((post) => ({ slug: post.slug }));
 }
 
 /**
@@ -36,15 +31,16 @@ export async function generateStaticParams() {
 export async function generateMetadata({
 	params,
 }: PostPageProps): Promise<Metadata> {
-	const slug = (await params).slug;
-	const post = await getPostBySlug(slug);
-	const thumbnail = post.fields.thumbnail as Asset;
+	const post = getPostBySlug((await params).slug);
+	if (!post) {
+		notFound();
+	}
 
 	return {
-		title: `${post.fields.title} | Bison Voyageur`,
-		description: post.fields.summary,
+		title: `${post.title} | Bison Voyageur`,
+		description: post.summary,
 		openGraph: {
-			images: [`https:${thumbnail.fields.file?.url}`],
+			images: [`https://bisonvoyageur.com${post.mainPicture.src}`],
 		},
 		metadataBase: new URL("https://bisonvoyageur.com"),
 	};
@@ -54,20 +50,17 @@ export async function generateMetadata({
  * Post Page component
  */
 export default async function PostPage({ params }: PostPageProps) {
-	const slug = (await params).slug;
-	const post = await getPostBySlug(slug);
-	const postTags = post.fields.tags as Entry<TagType, undefined, string>[];
-
+	const post = getPostBySlug((await params).slug);
 	if (!post) {
 		notFound();
 	}
 
-	const allPosts = await getAllPosts("asc");
+	const allPosts = getAllPosts("asc");
 
 	return (
 		<article className={style.wrapper}>
 			<PostHeader post={post} className={style.header} />
-			{postTags.length > 0 && <TagList tags={postTags} />}
+			{post.tags.length > 0 && <TagList tags={post.tags} />}
 			<PostContent
 				post={post}
 				className={style.content}
